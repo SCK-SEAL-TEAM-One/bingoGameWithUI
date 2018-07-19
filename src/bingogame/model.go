@@ -20,3 +20,8 @@ type Game struct {
 	Players   []Player
 	NumberBox []int
 }
+
+type PlayResponse struct {
+	Number int
+	Winner string
+}
