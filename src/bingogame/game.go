@@ -14,3 +14,27 @@ func (g *Game) PickUpNumber() int {
 	pickUpNumber, g.NumberBox = g.NumberBox[0], g.NumberBox[1:]
 	return pickUpNumber
 }
+
+func (g *Game) Play() PlayResponse {
+
+	playResponse := PlayResponse{}
+
+	pickupNumber := g.PickUpNumber()
+	positionXPlayer1, positionYPlayer1 := g.Players[0].CheckNumber(pickupNumber)
+	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
+		g.Players[0].Mark(positionXPlayer1, positionYPlayer1)
+		if g.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
+			playResponse.Winner = g.Players[0].Name
+		}
+	}
+
+	positionXPlayer2, positionYPlayer2 := g.Players[1].CheckNumber(pickupNumber)
+	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
+		g.Players[1].Mark(positionXPlayer2, positionYPlayer2)
+		if g.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
+			playResponse.Winner = g.Players[1].Name
+		}
+	}
+	playResponse.Number = pickupNumber
+	return playResponse
+}
