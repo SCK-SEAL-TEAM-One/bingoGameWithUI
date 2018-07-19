@@ -146,9 +146,7 @@ func Test_AcceptanceTest_VerticalBingoRule_Input_Player_A_And_B_PlayRound_8_Shou
 	}
 }
 
-func MockNumberBox() []int {
-	return []int{9, 51, 47, 29, 56, 49, 39, 58}
-}
+
 
 func Test_AcceptanceTest_VerticalCenterBingoRule_Input_Player_A_And_B_PlayRound_6_Should_Be_Player_B_Bingo_With_Number_45_14_41_32_11_36(t *testing.T) {
 	ticketBlankPlayerA := NewTicket(5)
@@ -259,8 +257,4 @@ func Test_AcceptanceTest_VerticalCenterBingoRule_Input_Player_A_And_B_PlayRound_
 		t.Errorf("expected player is %s but it got %s", expectedBingoPlayer, actualBingoPlayer)
 	}
 
-}
-
-func MockNumberBoxForCase2() []int {
-	return []int{45, 14, 41, 32, 11, 36}
 }
