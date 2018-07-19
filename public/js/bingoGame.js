@@ -23,20 +23,20 @@ function random() {
     var host = "http://localhost:3000/bingogame/info"
     $.get(host, function (responseData) {
 
-        for (var i = 0; i < responseDatd.playerOne.ticket.sizeX; i++; ){
-        $("#ticketPlayerOne").("<tr>")
-        for (var j = 0; j < responseDatd.playerOne.ticket.sizeY; j++; ) {
+        for (var i = 0; i < responseDatd.playerOne.ticket.sizeX; i++){
+        $("#ticketPlayerOne").append("<tr>")
+        for (var j = 0; j < responseDatd.playerOne.ticket.sizeY; j++) {
             $("#ticketPlayerOne").append("<td>" + responseDatd.playerOne.grid[i][i] + "</td>")
         }
-        $("#ticketPlayerOne").("</tr>")
+        $("#ticketPlayerOne").append("</tr>")
     }
 
-    for (var i = 0; i < responseDatd.playerTwo.ticket.sizeX; i++; ) {
-        $("#ticketplayerTwo").("<tr>")
-        for (var j = 0; j < responseDatd.playerTwo.ticket.sizeY; j++; ) {
+    for (var i = 0; i < responseDatd.playerTwo.ticket.sizeX; i++) {
+        $("#ticketplayerTwo").append("<tr>")
+        for (var j = 0; j < responseDatd.playerTwo.ticket.sizeY; j++) {
             $("#ticketplayerTwo").append("<td>" + responseDatd.playerTwo.grid[i][i] + "</td>")
         }
-        $("#ticketplayerTwo").("</tr>")
+        $("#ticketplayerTwo").append("</tr>")
     }
 
 })
