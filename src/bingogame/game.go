@@ -12,5 +12,6 @@ func NewGame(players []Player, numberBox []int) Game {
 func (g *Game) PickUpNumber() int {
 	var pickUpNumber int
 	pickUpNumber, g.NumberBox = g.NumberBox[0], g.NumberBox[1:]
+	g.HistoryPickUp = append(g.HistoryPickUp, pickUpNumber)
 	return pickUpNumber
 }
