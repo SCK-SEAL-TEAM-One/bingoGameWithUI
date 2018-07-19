@@ -56,3 +56,27 @@ func Test_PickUpNumber_Should_Be_Number_In_NumberBox(t *testing.T) {
 		}
 	}
 }
+
+func Test_Play_Should_Be_Play_Response(t *testing.T) {
+	ticketBlankPlayerA := NewTicket(5)
+	ticketBlankPlayerB := NewTicket(5)
+	ticketWithNumberA := MockTicketNumber(ticketBlankPlayerA, 1)
+	ticketWithNumberB := MockTicketNumber(ticketBlankPlayerB, 2)
+	playerA := NewPlayer("A", ticketWithNumberA)
+	playerB := NewPlayer("B", ticketWithNumberB)
+	numberBox := NewNumberBox(75)
+	numberBox = MockNumberBox()
+	allPlayer := []Player{playerA, playerB}
+	game := NewGame(allPlayer, numberBox)
+
+	expected := PlayResponse{
+		Number: 9,
+		Winner: "",
+	}
+
+	actual := game.Play()
+
+	if expected != actual {
+		t.Errorf("expected %v but got %v", expected, actual)
+	}
+}
