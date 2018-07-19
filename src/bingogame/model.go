@@ -17,8 +17,9 @@ type Player struct {
 }
 
 type Game struct {
-	Players   []Player
-	NumberBox []int
+	Players       []Player
+	NumberBox     []int
+	HistoryPickUp []int
 }
 
 type PlayResponse struct {
