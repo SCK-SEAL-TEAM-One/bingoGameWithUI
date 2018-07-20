@@ -16,13 +16,13 @@ func Test_PlayHandle_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
 		Winner: "",
 	}
 
-	rwq := httptest.NewRequest("GET", "localhost:3000/bigo/play", nil)
-	w := httptest.NewRecorder()
+	request := httptest.NewRequest("GET", "localhost:3000/bigo/play", nil)
+	responseRecorder := httptest.NewRecorder()
 
-	PlayHandler(w, rwq)
+	PlayHandler(responseRecorder, request)
 
-	resp := w.Result()
-	body, _ := ioutil.ReadAll(resp.Body)
+	response := responseRecorder.Result()
+	body, _ := ioutil.ReadAll(response.Body)
 	var actaul PlayResponse
 	json.Unmarshal(body, &actaul)
 
