@@ -5,7 +5,7 @@ $(function () {
 })
 
 function startGame() {
-    var host = "http://localhost:3000/bingogame/start"
+    var host = "http://localhost:3000/bingo/start"
     var parameter = {
         playerOne: $('#playerOne').val(),
         playerTwo: $('#playerTwo').val()
@@ -25,7 +25,7 @@ function random() {
         var tr = $('<tr>') 
         $("#ticketPlayerOne").append("<tr>")
         for (var indexRow = 0; indexRow < responseDatd.playerOne.ticket.sizeY; j++) {
-            tr.append("<td>" + responseDatd.playerOne.grid[i][i] + "</td>")
+            tr.append("<td>" + responseDatd.playerOne.grid[i][j] + "</td>")
         }
         $("#ticketPlayerOne").append(tr)
     }
@@ -33,7 +33,7 @@ function random() {
     for (var indexcolumn = 0; indexcolumn < responseDatd.playerTwo.ticket.sizeX; i++) {
         var tr = $('<tr>') 
         for (var indexRow = 0; indexRow < responseDatd.playerTwo.ticket.sizeY; j++) {
-            tr.append("<td>" + responseDatd.playerTwo.grid[i][i] + "</td>")
+            tr.append("<td>" + responseDatd.playerTwo.grid[i][j] + "</td>")
         }
         $("#ticketplayerTwo").append(tr)
     }
