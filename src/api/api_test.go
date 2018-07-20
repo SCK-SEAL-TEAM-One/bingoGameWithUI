@@ -67,15 +67,15 @@ func Test_GetPlayersInfoHandler_Should_Be_InfoResponse(t *testing.T) {
 }
 
 func Test_StartGameHandler(t *testing.T) {
-	request := StartGameRequest{PlayerOne: "A", PlayerTwo: "B"}
-	requestByte, _ := json.Marshal(request)
+	requestPlayers := StartGameRequest{PlayerOne: "A", PlayerTwo: "B"}
+	requestByte, _ := json.Marshal(requestPlayers)
 
-	req := httptest.NewRequest("POST", "/bingo/start", bytes.NewBuffer(requestByte))
-	w := httptest.NewRecorder()
+	request := httptest.NewRequest("POST", "/bingo/start", bytes.NewBuffer(requestByte))
+	responseRecorder := httptest.NewRecorder()
 	api := Api{}
-	api.StartGameHandler(w, req)
+	api.StartGameHandler(responseRecorder, request)
 	expectedRespondstatus := 200
-	response := w.Result()
+	response := responseRecorder.Result()
 	if expectedRespondstatus != response.StatusCode {
 		t.Errorf("expect %d but got %d", expectedRespondstatus, response.StatusCode)
 	}
