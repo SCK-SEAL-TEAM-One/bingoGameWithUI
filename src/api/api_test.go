@@ -10,24 +10,43 @@ import (
 	"testing"
 )
 
-func Test_PlayHandle_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
-	expected := PlayResponse{
+func Test_PlayHandler_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
+
+	request := httptest.NewRequest("GET", "/bigo/play", nil)
+	responseRecorder := httptest.NewRecorder()
+	expected := bingogame.PlayResponse{
 		Number: 9,
 		Winner: "",
 	}
 
-	request := httptest.NewRequest("GET", "localhost:3000/bigo/play", nil)
-	responseRecorder := httptest.NewRecorder()
+	ticketOne := bingogame.NewTicket(5)
+	ticketTwo := bingogame.NewTicket(5)
+	ticketWithNumberOne := MockTicketNumber(ticketOne, 1)
+	ticketWithNumberTwo := MockTicketNumber(ticketTwo, 2)
+	playerOne := bingogame.NewPlayer("A", ticketWithNumberOne)
+	playerTwo := bingogame.NewPlayer("B", ticketWithNumberTwo)
+	numberBox := []int{9, 2, 1, 3, 7, 3, 6, 2, 3, 6}
+	api := Api{
+		Game: bingogame.Game{
+			Players: []bingogame.Player{
+				playerOne,
+				playerTwo,
+			},
+			NumberBox:     numberBox,
+			HistoryPickUp: []int{},
+		},
+	}
 
-	PlayHandler(responseRecorder, request)
+	api.PlayHandler(responseRecorder, request)
 
 	response := responseRecorder.Result()
 	body, _ := ioutil.ReadAll(response.Body)
-	var actaul PlayResponse
-	json.Unmarshal(body, &actaul)
+	var actual bingogame.PlayResponse
+	json.Unmarshal(body, &actual)
+	//expected2, _ := json.Marshal(expected)
 
-	if expected != actaul {
-		t.Errorf("expected %v but got %v", expected, actaul)
+	if expected != actual {
+		t.Errorf("expected %v but got %v", expected, actual)
 	}
 }
 func Test_GetPlayersInfoHandler_Should_Be_InfoResponse(t *testing.T) {
@@ -45,23 +64,26 @@ func Test_GetPlayersInfoHandler_Should_Be_InfoResponse(t *testing.T) {
 		PlayerTwo:     playerTwo,
 		HistoryPickUp: []int{},
 	}
+	expectedResponseString, _ := json.Marshal(expectedResponse)
+	numberBox := []int{9, 2, 1, 3, 7, 3, 6, 2, 3, 6}
 	api := Api{
 		Game: bingogame.Game{
 			Players: []bingogame.Player{
 				playerOne,
 				playerTwo,
 			},
+			NumberBox:     numberBox,
+			HistoryPickUp: []int{},
 		},
 	}
 
 	api.GetPlayersInfoHandler(responseRecorder, request)
+
 	response := responseRecorder.Result()
 	body, _ := ioutil.ReadAll(response.Body)
-	var actualResponse PlayerInfoResponse
-	json.Unmarshal(body, &actualResponse)
 
-	if expectedResponse.PlayerOne.Name != actualResponse.PlayerOne.Name {
-		t.Errorf("Should be %s but it got %s", expectedResponse.PlayerOne.Name, actualResponse.PlayerOne.Name)
+	if string(expectedResponseString) != string(body) {
+		t.Errorf("Should be %s but it got %s", string(expectedResponseString), string(body))
 	}
 
 }
