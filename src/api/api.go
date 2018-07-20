@@ -68,7 +68,7 @@ func (a Api) StartGameHandler(w http.ResponseWriter, r *http.Request) {
 
 func PlayHandler(w http.ResponseWriter, r *http.Request) {
 	num := 9
-	playerWin := ""
+	playerWin := "A"
 	playJson, _ := json.Marshal(PlayResponse{Number: num, Winner: playerWin})
 	w.Write(playJson)
 }
