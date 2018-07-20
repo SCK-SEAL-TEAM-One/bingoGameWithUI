@@ -6,7 +6,7 @@ func NewNumberBox(endNumber int) []int {
 }
 
 func NewGame(players []Player, numberBox []int) Game {
-	return Game{Players: players, NumberBox: numberBox}
+	return Game{Players: players, NumberBox: numberBox, HistoryPickUp: []int{}}
 }
 
 func (g *Game) PickUpNumber() int {

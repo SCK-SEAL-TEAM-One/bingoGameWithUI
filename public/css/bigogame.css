@@ -33,3 +33,7 @@ tr {
     text-align: center;
     font: 32px Arial, sans-serif;
   }
+
+.mark {
+    background-color: red
+}

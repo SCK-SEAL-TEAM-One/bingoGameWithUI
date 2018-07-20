@@ -3,6 +3,7 @@ package api
 import (
 	"bingogame"
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
 )
 
@@ -11,13 +12,16 @@ const (
 	numberInBox  = 75
 )
 
+var ticket bingogame.Ticket
+
 type StartGameRequest struct {
 	PlayerOne string `json:"playerOne"`
 	PlayerTwo string `json:"playerTwo"`
 }
 
 type Api struct {
-	Game bingogame.Game
+	Game   bingogame.Game
+	Number int
 }
 
 type PlayerInfoResponse struct {
@@ -31,14 +35,17 @@ type PlayResponse struct {
 	Winner string `json:"winner"`
 }
 
-func (a Api) GetPlayersInfoHandler(w http.ResponseWriter, r *http.Request) {
-	ticketBlankPlayerA := bingogame.NewTicket(5)
-	ticketBlankPlayerB := bingogame.NewTicket(5)
-	playerOne := a.Game.Players[0]
-	playerOne.Ticket = MockTicketNumber(ticketBlankPlayerA, 1)
-	playerTwo := a.Game.Players[1]
-	playerTwo.Ticket = MockTicketNumber(ticketBlankPlayerB, 2)
-
+func (a *Api) GetPlayersInfoHandler(w http.ResponseWriter, r *http.Request) {
+	gameData, err := ioutil.ReadFile("./gamedata")
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	err = json.Unmarshal(gameData, &a.Game)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
 	playerInfoResponse := PlayerInfoResponse{
 		PlayerOne:     a.Game.Players[0],
 		PlayerTwo:     a.Game.Players[1],
@@ -48,28 +55,54 @@ func (a Api) GetPlayersInfoHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(playerInfoResponseJson)
 }
 
-func (a Api) StartGameHandler(w http.ResponseWriter, r *http.Request) {
+func (a *Api) StartGameHandler(w http.ResponseWriter, r *http.Request) {
 	request := StartGameRequest{}
 	err := json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
 	}
-	ticket := bingogame.NewTicket(numberOfGrid)
-	ticket1 := bingogame.MockTicketNumber(ticket, 1)
-	ticket2 := bingogame.MockTicketNumber(ticket, 2)
+	ticket1 := bingogame.NewTicket(numberOfGrid)
+	ticket2 := bingogame.NewTicket(numberOfGrid)
+	ticket1 = bingogame.MockTicketNumber(ticket1, 1)
+	ticket2 = bingogame.MockTicketNumber(ticket2, 2)
 	player1 := bingogame.NewPlayer(request.PlayerOne, ticket1)
 	player2 := bingogame.NewPlayer(request.PlayerTwo, ticket2)
 	numberBox := bingogame.MockNumberBox()
 	allPlayer := []bingogame.Player{player1, player2}
 	a.Game = bingogame.NewGame(allPlayer, numberBox)
+	gameData, err := json.Marshal(a.Game)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	err = ioutil.WriteFile("./gamedata", gameData, 0644)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
 	w.WriteHeader(http.StatusOK)
 }
 
 func (a Api) PlayHandler(w http.ResponseWriter, r *http.Request) {
+	gameData, err := ioutil.ReadFile("./gamedata")
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	err = json.Unmarshal(gameData, &a.Game)
 	playResponse := a.Game.Play()
 	playJson, _ := json.Marshal(playResponse)
-
+	gameData, err = json.Marshal(a.Game)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	err = ioutil.WriteFile("./gamedata", gameData, 0644)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
 	w.Write(playJson)
 }
 
