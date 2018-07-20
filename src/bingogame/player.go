@@ -1,9 +1,5 @@
 package bingogame
 
-import (
-	"fmt"
-)
-
 func NewPlayer(name string, ticket Ticket) Player {
 	return Player{
 		Name:   name,
@@ -56,10 +52,8 @@ func (p Player) CheckHorizental(positionX, positionY int) bool {
 	var number int
 	positionX -= 1
 	for columnIndex := 0; columnIndex < p.Ticket.SizeY; columnIndex++ {
-		fmt.Println(p.Ticket.Grid[positionX][columnIndex].Status)
 		if p.Ticket.Grid[positionX][columnIndex].Status == true {
 			number++
-			fmt.Println(number)
 			if number == p.Ticket.SizeY {
 				return true
 			}
