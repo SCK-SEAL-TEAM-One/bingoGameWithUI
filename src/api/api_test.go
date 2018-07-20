@@ -43,7 +43,6 @@ func Test_PlayHandler_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
 	body, _ := ioutil.ReadAll(response.Body)
 	var actual bingogame.PlayResponse
 	json.Unmarshal(body, &actual)
-	//expected2, _ := json.Marshal(expected)
 
 	if expected != actual {
 		t.Errorf("expected %v but got %v", expected, actual)
