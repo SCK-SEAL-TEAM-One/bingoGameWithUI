@@ -5,11 +5,11 @@ Library    SeleniumLibrary
 ${URL}    http://localhost:3000/bingogame
 ***Test Cases***
 Vertical Bingo Player A Win in 8 Rounds
-    Open Browser    ${URL}    headlesschrome
+    Open Browser    ${URL}    chrome
     Input Text    id=playerOne    A
     Input Text    id=playerTwo    B
     Click Button    id=startGame
-    Wait Until Page Contains    เลขที่สุ่มครั้งที่แล้ว
+    Wait Until Page Contains    สุ่มเลข
     Element Text Should Be    id=playerOne    A
     Element Text Should Be    id=playerTwo    B
     กดปุ่มสุ่มเลขและต้องได้เลข    9
