@@ -57,7 +57,7 @@ func Test_PickUpNumber_Should_Be_Number_In_NumberBox(t *testing.T) {
 	}
 }
 
-func Test_Play_Should_Be_Play_Response(t *testing.T) {
+func Test_Play_Should_Be_Play_Response_Number_9_Winner_Empty(t *testing.T) {
 	ticketBlankPlayerA := NewTicket(5)
 	ticketBlankPlayerB := NewTicket(5)
 	ticketWithNumberA := MockTicketNumber(ticketBlankPlayerA, 1)
