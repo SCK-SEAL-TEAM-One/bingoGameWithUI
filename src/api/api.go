@@ -20,8 +20,7 @@ type StartGameRequest struct {
 }
 
 type Api struct {
-	Game   bingogame.Game
-	Number int
+	Game bingogame.Game
 }
 
 type PlayerInfoResponse struct {

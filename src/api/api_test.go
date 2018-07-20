@@ -36,7 +36,8 @@ func Test_PlayHandler_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
 			HistoryPickUp: []int{},
 		},
 	}
-
+	gameData, _ := json.Marshal(api.Game)
+	ioutil.WriteFile("./gamedata", gameData, 0644)
 	api.PlayHandler(responseRecorder, request)
 
 	response := responseRecorder.Result()
