@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+
 	http.HandleFunc("/bingo/play", api.PlayHandler)
 	fs := http.FileServer(http.Dir("./public"))
 	http.Handle("/bingogame", http.StripPrefix("/bingogame", fs))
