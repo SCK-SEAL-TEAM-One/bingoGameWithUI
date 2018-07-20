@@ -23,6 +23,6 @@ type Game struct {
 }
 
 type PlayResponse struct {
-	Number int
-	Winner string
+	Number int `json:"number"`
+	Winner string `json:"winner"`
 }

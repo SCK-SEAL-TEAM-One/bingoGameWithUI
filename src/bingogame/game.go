@@ -1,9 +1,5 @@
 package bingogame
-type Play struct{
-	Number int `json:"number"`
-	Winner string `json:"winner"`
 
-}
 func NewNumberBox(endNumber int) []int {
 	startNumber := 1
 	return Shuffle(startNumber, endNumber)
