@@ -16,13 +16,13 @@ func Test_PlayHandle_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
 		Winner: "",
 	}
 
-	rwq := httptest.NewRequest("GET", "localhost:3000/bigo/play", nil)
-	w := httptest.NewRecorder()
+	request := httptest.NewRequest("GET", "localhost:3000/bigo/play", nil)
+	responseRecorder := httptest.NewRecorder()
 
-	PlayHandler(w, rwq)
+	PlayHandler(responseRecorder, request)
 
-	resp := w.Result()
-	body, _ := ioutil.ReadAll(resp.Body)
+	response := responseRecorder.Result()
+	body, _ := ioutil.ReadAll(response.Body)
 	var actaul PlayResponse
 	json.Unmarshal(body, &actaul)
 
@@ -67,15 +67,15 @@ func Test_GetPlayersInfoHandler_Should_Be_InfoResponse(t *testing.T) {
 }
 
 func Test_StartGameHandler(t *testing.T) {
-	request := StartGameRequest{PlayerOne: "A", PlayerTwo: "B"}
-	requestByte, _ := json.Marshal(request)
+	requestPlayers := StartGameRequest{PlayerOne: "A", PlayerTwo: "B"}
+	requestByte, _ := json.Marshal(requestPlayers)
 
-	req := httptest.NewRequest("POST", "/bingo/start", bytes.NewBuffer(requestByte))
-	w := httptest.NewRecorder()
+	request := httptest.NewRequest("POST", "/bingo/start", bytes.NewBuffer(requestByte))
+	responseRecorder := httptest.NewRecorder()
 	api := Api{}
-	api.StartGameHandler(w, req)
+	api.StartGameHandler(responseRecorder, request)
 	expectedRespondstatus := 200
-	response := w.Result()
+	response := responseRecorder.Result()
 	if expectedRespondstatus != response.StatusCode {
 		t.Errorf("expect %d but got %d", expectedRespondstatus, response.StatusCode)
 	}
