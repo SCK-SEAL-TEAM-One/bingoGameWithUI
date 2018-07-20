@@ -56,6 +56,7 @@ function play() {
     $.getJSON(host, function (responseData) {
         $("#number").html(responseData.number);
         $(".number-" + responseData.number).addClass("mark")
+        $("#historyRandomNumber").append(responseData.number+", ")
         if (responseData.winner != "") {
             setTimeout(function () {
                 alert("Player " + responseData.winner + " Win");
