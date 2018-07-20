@@ -66,10 +66,10 @@ func (a Api) StartGameHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-func PlayHandler(w http.ResponseWriter, r *http.Request) {
-	num := 9
-	playerWin := ""
-	playJson, _ := json.Marshal(PlayResponse{Number: num, Winner: playerWin})
+func (a Api) PlayHandler(w http.ResponseWriter, r *http.Request) {
+	playResponse := a.Game.Play()
+	playJson, _ := json.Marshal(playResponse)
+
 	w.Write(playJson)
 }
 
