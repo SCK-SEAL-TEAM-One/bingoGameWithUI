@@ -21,11 +21,11 @@ func Test_PlayHandler_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
 
 	ticketOne := bingogame.NewTicket(5)
 	ticketTwo := bingogame.NewTicket(5)
-	ticketWithNumberOne := MockTicketNumber(ticketOne, 1)
-	ticketWithNumberTwo := MockTicketNumber(ticketTwo, 2)
+	ticketWithNumberOne := bingogame.MockTicketNumber(ticketOne, 1)
+	ticketWithNumberTwo := bingogame.MockTicketNumber(ticketTwo, 2)
 	playerOne := bingogame.NewPlayer("A", ticketWithNumberOne)
 	playerTwo := bingogame.NewPlayer("B", ticketWithNumberTwo)
-	numberBox := []int{9, 2, 1, 3, 7, 3, 6, 2, 3, 6}
+	numberBox := bingogame.MockNumberBox()
 	api := Api{
 		Game: bingogame.Game{
 			Players: []bingogame.Player{
@@ -75,14 +75,15 @@ func Test_GetPlayersInfoHandler_Should_Be_InfoResponse(t *testing.T) {
 			HistoryPickUp: []int{},
 		},
 	}
-
+	gameData, _ := json.Marshal(api.Game)
+	ioutil.WriteFile("./gamedata", gameData, 0644)
 	api.GetPlayersInfoHandler(responseRecorder, request)
 
 	response := responseRecorder.Result()
 	body, _ := ioutil.ReadAll(response.Body)
 
 	if string(expectedResponseString) != string(body) {
-		t.Errorf("Should be %s but it got %s", string(expectedResponseString), string(body))
+		t.Errorf("Should be \n%s but it got \n%s", string(expectedResponseString), string(body))
 	}
 
 }
