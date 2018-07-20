@@ -1,6 +1,7 @@
 $(function () {
     $('#startGame').click(startGame)
     $('#random').click(random)
+    $('#random').click(play)
 })
 
 function startGame() {
@@ -17,7 +18,7 @@ function startGame() {
 }
 
 function random() {
-    var host = "http://localhost:3000/bingogame/info"
+    var host = "http://localhost:3000/bingo/info"
     $.get(host, function (responseData) {
 
     for (var indexColumn = 0; indexcolumn < responseDatd.playerOne.ticket.sizeX; i++){
@@ -41,9 +42,11 @@ function random() {
 }
 
 function play() {
-    var host = "http://localhost:3000/bingogame/play"
+    
+    var host = "http://localhost:3000/bingo/play"
     $.get(host, function (responseData) {
-        if (responseData.winner != "") {
+        console.log("dj",responseData);
+        if (responseData.winner == "") {
             $("#randomNumber").html(responseData.number);
 
             // set ค่าใน cell
