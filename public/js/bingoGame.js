@@ -1,9 +1,7 @@
 $(function () {
     $('#startGame').click(startGame)
-})
-
-$(function () {
     $('#random').click(random)
+    $('#random').click(play)
 })
 
 function startGame() {
@@ -20,32 +18,35 @@ function startGame() {
 }
 
 function random() {
-    var host = "http://localhost:3000/bingogame/info"
+    var host = "http://localhost:3000/bingo/info"
     $.get(host, function (responseData) {
 
-        for (var i = 0; i < responseDatd.playerOne.ticket.sizeX; i++){
+    for (var indexColumn = 0; indexcolumn < responseDatd.playerOne.ticket.sizeX; i++){
+        var tr = $('<tr>') 
         $("#ticketPlayerOne").append("<tr>")
-        for (var j = 0; j < responseDatd.playerOne.ticket.sizeY; j++) {
-            $("#ticketPlayerOne").append("<td>" + responseDatd.playerOne.grid[i][i] + "</td>")
+        for (var indexRow = 0; indexRow < responseDatd.playerOne.ticket.sizeY; j++) {
+            tr.append("<td>" + responseDatd.playerOne.grid[i][i] + "</td>")
         }
-        $("#ticketPlayerOne").append("</tr>")
+        $("#ticketPlayerOne").append(tr)
     }
 
-    for (var i = 0; i < responseDatd.playerTwo.ticket.sizeX; i++) {
-        $("#ticketplayerTwo").append("<tr>")
-        for (var j = 0; j < responseDatd.playerTwo.ticket.sizeY; j++) {
-            $("#ticketplayerTwo").append("<td>" + responseDatd.playerTwo.grid[i][i] + "</td>")
+    for (var indexcolumn = 0; indexcolumn < responseDatd.playerTwo.ticket.sizeX; i++) {
+        var tr = $('<tr>') 
+        for (var indexRow = 0; indexRow < responseDatd.playerTwo.ticket.sizeY; j++) {
+            tr.append("<td>" + responseDatd.playerTwo.grid[i][i] + "</td>")
         }
-        $("#ticketplayerTwo").append("</tr>")
+        $("#ticketplayerTwo").append(tr)
     }
 
 })
 }
 
 function play() {
-    var host = "http://localhost:3000/bingogame/play"
+    
+    var host = "http://localhost:3000/bingo/play"
     $.get(host, function (responseData) {
-        if (responseData.winner != "") {
+        console.log("dj",responseData);
+        if (responseData.winner == "") {
             $("#randomNumber").html(responseData.number);
 
             // set ค่าใน cell

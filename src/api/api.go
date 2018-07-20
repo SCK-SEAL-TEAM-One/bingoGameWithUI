@@ -69,6 +69,7 @@ func (a Api) StartGameHandler(w http.ResponseWriter, r *http.Request) {
 func (a Api) PlayHandler(w http.ResponseWriter, r *http.Request) {
 	playResponse := a.Game.Play()
 	playJson, _ := json.Marshal(playResponse)
+
 	w.Write(playJson)
 }
 
