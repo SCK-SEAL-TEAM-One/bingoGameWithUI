@@ -13,7 +13,26 @@ type GameService struct {
 	Game bingogame.Game
 }
 
-func (gs GameService) NewGame(playerOneName, playerTwoName string) error {
+func (g *GameService) PlayGame() bingogame.PlayResponse {
+
+	return g.Game.Play()
+}
+
+type PlayerInfoResponse struct {
+	PlayerOne     bingogame.Player `json:"playerOne"`
+	PlayerTwo     bingogame.Player `json:"playerTwo"`
+	HistoryPickUp []int            `json:"historyPickUp"`
+}
+
+func (g GameService) GetPlayerInfo() PlayerInfoResponse {
+	return PlayerInfoResponse{
+		PlayerOne:     g.Game.Players[0],
+		PlayerTwo:     g.Game.Players[1],
+		HistoryPickUp: g.Game.HistoryPickUp,
+	}
+}
+
+func (gs *GameService) NewGame(playerOneName, playerTwoName string) error {
 	ticket1 := bingogame.NewTicket(numberOfGrid)
 	ticket2 := bingogame.NewTicket(numberOfGrid)
 	ticket1 = bingogame.MockTicketNumber(ticket1, 1)

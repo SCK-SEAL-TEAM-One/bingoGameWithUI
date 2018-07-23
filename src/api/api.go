@@ -29,21 +29,7 @@ type PlayResponse struct {
 }
 
 func (a *Api) GetPlayersInfoHandler(writer http.ResponseWriter, request *http.Request) {
-	gameData, err := ioutil.ReadFile("./gamedata")
-	if err != nil {
-		http.Error(writer, err.Error(), 500)
-		return
-	}
-	err = json.Unmarshal(gameData, &a.Game)
-	if err != nil {
-		http.Error(writer, err.Error(), 500)
-		return
-	}
-	playerInfoResponse := PlayerInfoResponse{
-		PlayerOne:     a.Game.Players[0],
-		PlayerTwo:     a.Game.Players[1],
-		HistoryPickUp: a.Game.HistoryPickUp,
-	}
+	playerInfoResponse := a.GameService.GetPlayerInfo()
 	playerInfoResponseJson, _ := json.Marshal(playerInfoResponse)
 	writer.Write(playerInfoResponseJson)
 }
@@ -72,17 +58,7 @@ func (a Api) PlayHandler(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 	err = json.Unmarshal(gameData, &a.Game)
-	playResponse := a.Game.Play()
+	playResponse := a.Service.Game.Play()
 	playJson, _ := json.Marshal(playResponse)
-	gameData, err = json.Marshal(a.Game)
-	if err != nil {
-		http.Error(writer, err.Error(), 500)
-		return
-	}
-	err = ioutil.WriteFile("./gamedata", gameData, 0644)
-	if err != nil {
-		http.Error(writer, err.Error(), 500)
-		return
-	}
 	writer.Write(playJson)
 }
