@@ -22,6 +22,7 @@ type StartGameRequest struct {
 
 type Api struct {
 	Service service.PlayGameService
+	Game    bingogame.Game
 }
 
 type PlayerInfoResponse struct {
