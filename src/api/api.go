@@ -50,8 +50,7 @@ func (a *Api) StartGameHandler(writer http.ResponseWriter, request *http.Request
 	writer.WriteHeader(http.StatusOK)
 }
 
-func (a Api) PlayHandler(writer http.ResponseWriter, request *http.Request) {
-
+func (a *Api) PlayHandler(writer http.ResponseWriter, request *http.Request) {
 	playResponse := a.GameService.PlayGame()
 	playJson, _ := json.Marshal(playResponse)
 	writer.Write(playJson)
