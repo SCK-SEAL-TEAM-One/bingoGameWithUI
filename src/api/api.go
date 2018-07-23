@@ -3,7 +3,6 @@ package api
 import (
 	"bingogame"
 	"encoding/json"
-	"io/ioutil"
 	"net/http"
 	"service"
 )
@@ -53,24 +52,8 @@ func (a *Api) StartGameHandler(writer http.ResponseWriter, request *http.Request
 	writer.WriteHeader(http.StatusOK)
 }
 
-func (a Api) PlayHandler(writer http.ResponseWriter, request *http.Request) {
-	gameData, err := ioutil.ReadFile("./gamedata")
-	if err != nil {
-		http.Error(writer, err.Error(), 500)
-		return
-	}
-	err = json.Unmarshal(gameData, &a.Game)
-	playResponse := a.Game.Play()
+func (a *Api) PlayHandler(writer http.ResponseWriter, request *http.Request) {
+	playResponse := a.GameService.Game.Play()
 	playJson, _ := json.Marshal(playResponse)
-	gameData, err = json.Marshal(a.Game)
-	if err != nil {
-		http.Error(writer, err.Error(), 500)
-		return
-	}
-	err = ioutil.WriteFile("./gamedata", gameData, 0644)
-	if err != nil {
-		http.Error(writer, err.Error(), 500)
-		return
-	}
 	writer.Write(playJson)
 }
