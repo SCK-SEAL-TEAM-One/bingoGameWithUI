@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"service"
 )
 
 const (
@@ -20,7 +21,7 @@ type StartGameRequest struct {
 }
 
 type Api struct {
-	Game bingogame.Game
+	Service service.PlayGameService
 }
 
 type PlayerInfoResponse struct {
@@ -90,7 +91,7 @@ func (a Api) PlayHandler(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 	err = json.Unmarshal(gameData, &a.Game)
-	playResponse := a.Game.Play()
+	playResponse := a.Service.Game.Play()
 	playJson, _ := json.Marshal(playResponse)
 	gameData, err = json.Marshal(a.Game)
 	if err != nil {
