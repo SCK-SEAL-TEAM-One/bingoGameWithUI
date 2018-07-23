@@ -5,11 +5,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-)
-
-const (
-	numberOfGrid = 5
-	numberInBox  = 75
+	"service"
 )
 
 var ticket bingogame.Ticket
@@ -20,7 +16,7 @@ type StartGameRequest struct {
 }
 
 type Api struct {
-	Game bingogame.Game
+	GameService service.GameService
 }
 
 type PlayerInfoResponse struct {
@@ -61,23 +57,11 @@ func (a *Api) StartGameHandler(writer http.ResponseWriter, request *http.Request
 		http.Error(writer, err.Error(), 400)
 		return
 	}
-	ticket1 := bingogame.NewTicket(numberOfGrid)
-	ticket2 := bingogame.NewTicket(numberOfGrid)
-	ticket1 = bingogame.MockTicketNumber(ticket1, 1)
-	ticket2 = bingogame.MockTicketNumber(ticket2, 2)
-	player1 := bingogame.NewPlayer(requestGame.PlayerOne, ticket1)
-	player2 := bingogame.NewPlayer(requestGame.PlayerTwo, ticket2)
-	numberBox := bingogame.MockNumberBox()
-	allPlayer := []bingogame.Player{player1, player2}
-	a.Game = bingogame.NewGame(allPlayer, numberBox)
-	gameData, err := json.Marshal(a.Game)
+
+	err = a.GameService.NewGame(requestGame.PlayerOne, requestGame.PlayerTwo)
+
 	if err != nil {
-		http.Error(writer, err.Error(), 500)
-		return
-	}
-	err = ioutil.WriteFile("./gamedata", gameData, 0644)
-	if err != nil {
-		http.Error(writer, err.Error(), 500)
+		http.Error(writer, err.Error(), 400)
 		return
 	}
 	writer.WriteHeader(http.StatusOK)

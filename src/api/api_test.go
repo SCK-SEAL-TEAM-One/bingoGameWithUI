@@ -55,8 +55,8 @@ func Test_GetPlayersInfoHandler_Should_Be_InfoResponse(t *testing.T) {
 	responseRecorder := httptest.NewRecorder()
 	ticketOne := bingogame.NewTicket(5)
 	ticketTwo := bingogame.NewTicket(5)
-	ticketWithNumberOne := MockTicketNumber(ticketOne, 1)
-	ticketWithNumberTwo := MockTicketNumber(ticketTwo, 2)
+	ticketWithNumberOne := bingogame.MockTicketNumber(ticketOne, 1)
+	ticketWithNumberTwo := bingogame.MockTicketNumber(ticketTwo, 2)
 	playerOne := bingogame.NewPlayer("A", ticketWithNumberOne)
 	playerTwo := bingogame.NewPlayer("B", ticketWithNumberTwo)
 	expectedResponse := PlayerInfoResponse{
