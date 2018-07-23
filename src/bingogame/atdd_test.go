@@ -146,8 +146,6 @@ func Test_AcceptanceTest_VerticalBingoRule_Input_Player_A_And_B_PlayRound_8_Shou
 	}
 }
 
-
-
 func Test_AcceptanceTest_VerticalCenterBingoRule_Input_Player_A_And_B_PlayRound_6_Should_Be_Player_B_Bingo_With_Number_45_14_41_32_11_36(t *testing.T) {
 	ticketBlankPlayerA := NewTicket(5)
 	ticketBlankPlayerB := NewTicket(5)

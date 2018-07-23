@@ -49,4 +49,3 @@ func Test_GenerateTicketNumber_Input_BlankTicket_Should_Be_TicketWithNumber(t *t
 		}
 	}
 }
-
