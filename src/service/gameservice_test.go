@@ -1,7 +1,6 @@
 package service_test
 
 import (
-	"api"
 	"bingogame"
 	"service"
 	"testing"
@@ -10,11 +9,11 @@ import (
 func Test_GetPlayerInfo_Should_Be_PlayerInfoResponse(t *testing.T) {
 	ticketOne := bingogame.NewTicket(5)
 	ticketTwo := bingogame.NewTicket(5)
-	ticketWithNumberOne := api.MockTicketNumber(ticketOne, 1)
-	ticketWithNumberTwo := api.MockTicketNumber(ticketTwo, 2)
+	ticketWithNumberOne := bingogame.MockTicketNumber(ticketOne, 1)
+	ticketWithNumberTwo := bingogame.MockTicketNumber(ticketTwo, 2)
 	playerOne := bingogame.NewPlayer("A", ticketWithNumberOne)
 	playerTwo := bingogame.NewPlayer("B", ticketWithNumberTwo)
-	expectedResponse := api.PlayerInfoResponse{
+	expectedResponse := service.PlayerInfoResponse{
 		PlayerOne:     playerOne,
 		PlayerTwo:     playerTwo,
 		HistoryPickUp: []int{},
@@ -36,5 +35,18 @@ func Test_GetPlayerInfo_Should_Be_PlayerInfoResponse(t *testing.T) {
 	if expectedResponse.PlayerOne.Name != actual.PlayerOne.Name &&
 		expectedResponse.PlayerTwo.Name != actual.PlayerTwo.Name {
 		t.Errorf("expected %v but got %v", expectedResponse, actual)
+
+	}
+}
+
+func Test_NewGame_Input_PlayerNameOne_A_And_PlayerNameTwo_B_Should_Be_Error_Nil(t *testing.T) {
+	playerNameOne := "A"
+	playerNameTwo := "B"
+	gameService := service.GameService{}
+
+	actual := gameService.NewGame(playerNameOne, playerNameTwo)
+
+	if actual != nil && gameService.Game.Players[0].Name != playerNameOne && gameService.Game.Players[1].Name != playerNameTwo {
+		t.Errorf("expectedError nil but got %v", actual)
 	}
 }
