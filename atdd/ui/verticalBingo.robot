@@ -1,5 +1,6 @@
 ***Settings***
 Library    SeleniumLibrary
+Suite Teardown    ปิด Browser
 
 ***Variables***
 ${URL}    http://localhost:3000/bingogame
@@ -18,8 +19,7 @@ ${URL}    http://localhost:3000/bingogame
     กดปุ่มสุ่มเลขและต้องได้เลข    49
     กดปุ่มสุ่มเลขและต้องได้เลข    39
     กดปุ่มสุ่มเลขและต้องได้เลข    58
-    Alert Should Be Present    Player A Win
-    Close Browser
+    แสดงชื่อผู้ชนะ
 
 ***Keywords***
 เปิด Browser 
@@ -46,3 +46,9 @@ Element should have class
       [Arguments]    ${locator}    ${target value}
       ${class}=    Get Element Attribute    ${locator}@class
       Should Contain    ${class}    ${target value}
+
+แสดงชื่อผู้ชนะ
+      Alert Should Be Present    Player A Win
+
+ปิด Browser
+      Close Browser
