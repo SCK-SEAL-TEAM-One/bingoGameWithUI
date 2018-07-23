@@ -9,27 +9,14 @@ const (
 	numberInBox  = 75
 )
 
-type GameService struct {
-	Game bingogame.Game
-}
-
-func (g *GameService) PlayGame() bingogame.PlayResponse {
-
-	return g.Game.Play()
-}
-
 type PlayerInfoResponse struct {
 	PlayerOne     bingogame.Player `json:"playerOne"`
 	PlayerTwo     bingogame.Player `json:"playerTwo"`
 	HistoryPickUp []int            `json:"historyPickUp"`
 }
 
-func (g GameService) GetPlayerInfo() PlayerInfoResponse {
-	return PlayerInfoResponse{
-		PlayerOne:     g.Game.Players[0],
-		PlayerTwo:     g.Game.Players[1],
-		HistoryPickUp: g.Game.HistoryPickUp,
-	}
+type GameService struct {
+	Game bingogame.Game
 }
 
 func (gs *GameService) NewGame(playerOneName, playerTwoName string) error {
@@ -43,4 +30,17 @@ func (gs *GameService) NewGame(playerOneName, playerTwoName string) error {
 	allPlayer := []bingogame.Player{player1, player2}
 	gs.Game = bingogame.NewGame(allPlayer, numberBox)
 	return nil
+}
+
+func (g GameService) GetPlayerInfo() PlayerInfoResponse {
+	return PlayerInfoResponse{
+		PlayerOne:     g.Game.Players[0],
+		PlayerTwo:     g.Game.Players[1],
+		HistoryPickUp: g.Game.HistoryPickUp,
+	}
+}
+
+func (g *GameService) PlayGame() bingogame.PlayResponse {
+
+	return g.Game.Play()
 }
