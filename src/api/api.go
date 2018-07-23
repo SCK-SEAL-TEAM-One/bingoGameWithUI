@@ -62,15 +62,5 @@ func (a Api) PlayHandler(writer http.ResponseWriter, request *http.Request) {
 	err = json.Unmarshal(gameData, &a.Game)
 	playResponse := a.Service.Game.Play()
 	playJson, _ := json.Marshal(playResponse)
-	gameData, err = json.Marshal(a.Game)
-	if err != nil {
-		http.Error(writer, err.Error(), 500)
-		return
-	}
-	err = ioutil.WriteFile("./gamedata", gameData, 0644)
-	if err != nil {
-		http.Error(writer, err.Error(), 500)
-		return
-	}
 	writer.Write(playJson)
 }

@@ -52,7 +52,7 @@ func (g GameService) GetPlayerInfo() PlayerInfoResponse {
 	}
 }
 
-func (gs GameService) NewGame(playerOneName, playerTwoName string) error {
+func (gs *GameService) NewGame(playerOneName, playerTwoName string) error {
 	ticket1 := bingogame.NewTicket(numberOfGrid)
 	ticket2 := bingogame.NewTicket(numberOfGrid)
 	ticket1 = bingogame.MockTicketNumber(ticket1, 1)
