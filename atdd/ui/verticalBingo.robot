@@ -4,15 +4,12 @@ Library    SeleniumLibrary
 ***Variables***
 ${URL}    http://localhost:3000/bingogame
 ***Test Cases***
-Vertical Bingo Player A Win in 8 Rounds
-    Open Browser    ${URL}    chrome
-    Input Text    id=playerOne    A
-    Input Text    id=playerTwo    B
-    Click Button    id=startGame
-    Wait Until Page Contains    สุ่มเลข
-    Element Text Should Be    id=playerOne    A
-    Element Text Should Be    id=playerTwo    B
-    กดปุ่มสุ่มเลขและต้องได้เลข    9
+ผู้เล่น A ชนะ ผู้เล่น B ชนะ Bingo เรียงกันในแนวตั้งในรอบการสุ่มครั้งที่ 8
+    เปิด Browser
+    ใส่ชื่อผู้เล่นคนแรก    A
+    ใส่ชื่อผู้เล่นคนที่สอง    B
+    กดปุ่มเริ่มเกม     
+    เข้าสู่หน้าเล่นเกม
     กดปุ่มสุ่มเลขและต้องได้เลข    51
     กดปุ่มสุ่มเลขและต้องได้เลข    47
     กดปุ่มสุ่มเลขและต้องได้เลข    29
@@ -24,6 +21,20 @@ Vertical Bingo Player A Win in 8 Rounds
     Close Browser
 
 ***Keywords***
+เปิด Browser 
+     Open Browser    ${URL}    chrome
+ใส่ชื่อผู้เล่นคนแรก 
+      [Arguments]    ${name}
+      Input Text    id=playerOne    ${name}
+ใส่ชื่อผู้เล่นคนที่สอง
+      [Arguments]    ${name}
+      Input Text    id=playerTwo    ${name}
+กดปุ่มเริ่มเกม 
+      Click Button    id=startGame
+เข้าสู่หน้าเล่นเกม
+      Wait Until Page Contains    สุ่มเลข
+      Element Text Should Be    id=playerOne    A
+      Element Text Should Be    id=playerTwo    B
 กดปุ่มสุ่มเลขและต้องได้เลข
     [Arguments]    ${number}
     Click Button    id=random
