@@ -27,7 +27,7 @@ func Test_PlayHandler_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
 	playerOne := bingogame.NewPlayer("A", ticketWithNumberOne)
 	playerTwo := bingogame.NewPlayer("B", ticketWithNumberTwo)
 	numberBox := bingogame.MockNumberBox()
-	api := Api{
+	gameService := service.GameService{
 		Game: bingogame.Game{
 			Players: []bingogame.Player{
 				playerOne,
@@ -37,8 +37,10 @@ func Test_PlayHandler_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
 			HistoryPickUp: []int{},
 		},
 	}
-	gameData, _ := json.Marshal(api.Game)
-	ioutil.WriteFile("./gamedata", gameData, 0644)
+
+	api := Api{
+		GameService: gameService,
+	}
 	api.PlayHandler(responseRecorder, request)
 
 	response := responseRecorder.Result()
