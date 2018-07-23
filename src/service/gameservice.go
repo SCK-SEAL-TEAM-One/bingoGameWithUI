@@ -41,6 +41,5 @@ func (g GameService) GetPlayerInfo() PlayerInfoResponse {
 }
 
 func (g *GameService) PlayGame() bingogame.PlayResponse {
-
 	return g.Game.Play()
 }

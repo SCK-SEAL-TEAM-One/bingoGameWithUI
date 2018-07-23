@@ -11,45 +11,19 @@ import (
 	"testing"
 )
 
-func Test_PlayHandler_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
-
-	request := httptest.NewRequest("GET", "/bigo/play", nil)
+func Test_StartGameHandler(t *testing.T) {
+	requestPlayers := StartGameRequest{PlayerOne: "A", PlayerTwo: "B"}
+	requestByte, _ := json.Marshal(requestPlayers)
+	expectedRespondstatus := 200
+	request := httptest.NewRequest("POST", "/bingo/start", bytes.NewBuffer(requestByte))
 	responseRecorder := httptest.NewRecorder()
-	expected := bingogame.PlayResponse{
-		Number: 9,
-		Winner: "",
-	}
+	api := Api{}
 
-	ticketOne := bingogame.NewTicket(5)
-	ticketTwo := bingogame.NewTicket(5)
-	ticketWithNumberOne := bingogame.MockTicketNumber(ticketOne, 1)
-	ticketWithNumberTwo := bingogame.MockTicketNumber(ticketTwo, 2)
-	playerOne := bingogame.NewPlayer("A", ticketWithNumberOne)
-	playerTwo := bingogame.NewPlayer("B", ticketWithNumberTwo)
-	numberBox := bingogame.MockNumberBox()
-	gameService := service.GameService{
-		Game: bingogame.Game{
-			Players: []bingogame.Player{
-				playerOne,
-				playerTwo,
-			},
-			NumberBox:     numberBox,
-			HistoryPickUp: []int{},
-		},
-	}
-
-	api := Api{
-		GameService: gameService,
-	}
-	api.PlayHandler(responseRecorder, request)
+	api.StartGameHandler(responseRecorder, request)
 
 	response := responseRecorder.Result()
-	body, _ := ioutil.ReadAll(response.Body)
-	var actual bingogame.PlayResponse
-	json.Unmarshal(body, &actual)
-
-	if expected != actual {
-		t.Errorf("expected %v but got %v", expected, actual)
+	if expectedRespondstatus != response.StatusCode {
+		t.Errorf("expect %d but got %d", expectedRespondstatus, response.StatusCode)
 	}
 }
 func Test_GetPlayersInfoHandler_Should_Be_InfoResponse(t *testing.T) {
@@ -91,18 +65,44 @@ func Test_GetPlayersInfoHandler_Should_Be_InfoResponse(t *testing.T) {
 	}
 
 }
+func Test_PlayHandler_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
 
-func Test_StartGameHandler(t *testing.T) {
-	requestPlayers := StartGameRequest{PlayerOne: "A", PlayerTwo: "B"}
-	requestByte, _ := json.Marshal(requestPlayers)
-
-	request := httptest.NewRequest("POST", "/bingo/start", bytes.NewBuffer(requestByte))
+	request := httptest.NewRequest("GET", "/bigo/play", nil)
 	responseRecorder := httptest.NewRecorder()
-	api := Api{}
-	api.StartGameHandler(responseRecorder, request)
-	expectedRespondstatus := 200
+	expected := bingogame.PlayResponse{
+		Number: 9,
+		Winner: "",
+	}
+
+	ticketOne := bingogame.NewTicket(5)
+	ticketTwo := bingogame.NewTicket(5)
+	ticketWithNumberOne := bingogame.MockTicketNumber(ticketOne, 1)
+	ticketWithNumberTwo := bingogame.MockTicketNumber(ticketTwo, 2)
+	playerOne := bingogame.NewPlayer("A", ticketWithNumberOne)
+	playerTwo := bingogame.NewPlayer("B", ticketWithNumberTwo)
+	numberBox := bingogame.MockNumberBox()
+	gameService := service.GameService{
+		Game: bingogame.Game{
+			Players: []bingogame.Player{
+				playerOne,
+				playerTwo,
+			},
+			NumberBox:     numberBox,
+			HistoryPickUp: []int{},
+		},
+	}
+
+	api := Api{
+		GameService: gameService,
+	}
+	api.PlayHandler(responseRecorder, request)
+
 	response := responseRecorder.Result()
-	if expectedRespondstatus != response.StatusCode {
-		t.Errorf("expect %d but got %d", expectedRespondstatus, response.StatusCode)
+	body, _ := ioutil.ReadAll(response.Body)
+	var actual bingogame.PlayResponse
+	json.Unmarshal(body, &actual)
+
+	if expected != actual {
+		t.Errorf("expected %v but got %v", expected, actual)
 	}
 }

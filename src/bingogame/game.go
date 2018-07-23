@@ -1,5 +1,7 @@
 package bingogame
 
+const notfound = -1
+
 func NewNumberBox(endNumber int) []int {
 	startNumber := 1
 	return Shuffle(startNumber, endNumber)
@@ -17,29 +19,24 @@ func (g *Game) PickUpNumber() int {
 }
 
 func (g *Game) Play() PlayResponse {
-
 	playResponse := PlayResponse{}
-
 	pickupNumber := g.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 := g.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		g.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if g.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			playResponse.Winner = g.Players[0].Name
-		}
-	}
-
-	positionXPlayer2, positionYPlayer2 := g.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		g.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if g.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			playResponse.Winner = g.Players[1].Name
+	for index, _ := range g.Players {
+		positionX, positionY := g.Players[index].CheckNumber(pickupNumber)
+		if isInTicket(positionX, positionY) {
+			g.Players[index].Mark(positionX, positionY)
+			if g.Players[index].GetBingo(positionX, positionY) {
+				playResponse.Winner = g.Players[index].Name
+			}
 		}
 	}
 	playResponse.Number = pickupNumber
 	return playResponse
 }
 
+func isInTicket(positionX, positionY int) bool {
+	return positionX != notfound && positionY != notfound
+}
 func MockNumberBox() []int {
 	return []int{9, 51, 47, 29, 56, 49, 39, 58}
 }

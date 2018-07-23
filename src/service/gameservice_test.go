@@ -62,9 +62,7 @@ func Test_PlayGame_Should_Be_Number_9_Winer_Empty(t *testing.T) {
 	numberBox = bingogame.MockNumberBox()
 	allPlayer := []bingogame.Player{playerA, playerB}
 	game := bingogame.NewGame(allPlayer, numberBox)
-
 	gameService := service.GameService{Game: game}
-
 	expected := bingogame.PlayResponse{
 		Number: 9,
 		Winner: "",
@@ -73,6 +71,6 @@ func Test_PlayGame_Should_Be_Number_9_Winer_Empty(t *testing.T) {
 	actual := gameService.PlayGame()
 
 	if expected != actual {
-		t.Errorf("expect %v but got %v")
+		t.Errorf("expect %v but got %v", expected, actual)
 	}
 }
