@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http/httptest"
+	"service"
 	"testing"
 )
 
@@ -67,17 +68,17 @@ func Test_GetPlayersInfoHandler_Should_Be_InfoResponse(t *testing.T) {
 	expectedResponseString, _ := json.Marshal(expectedResponse)
 	numberBox := []int{9, 2, 1, 3, 7, 3, 6, 2, 3, 6}
 	api := Api{
-		Game: bingogame.Game{
-			Players: []bingogame.Player{
-				playerOne,
-				playerTwo,
+		GameService: service.GameService{
+			Game: bingogame.Game{
+				Players: []bingogame.Player{
+					playerOne,
+					playerTwo,
+				},
+				NumberBox:     numberBox,
+				HistoryPickUp: []int{},
 			},
-			NumberBox:     numberBox,
-			HistoryPickUp: []int{},
 		},
 	}
-	gameData, _ := json.Marshal(api.Game)
-	ioutil.WriteFile("./gamedata", gameData, 0644)
 	api.GetPlayersInfoHandler(responseRecorder, request)
 
 	response := responseRecorder.Result()
