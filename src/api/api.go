@@ -8,8 +8,6 @@ import (
 	"service"
 )
 
-var ticket bingogame.Ticket
-
 type StartGameRequest struct {
 	PlayerOne string `json:"playerOne"`
 	PlayerTwo string `json:"playerTwo"`
