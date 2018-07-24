@@ -14,14 +14,15 @@ function random() {
         appendTo("#ticketPlayerTwo", playerTwo.ticket)
     })
 }
-
+var numberHistory = [] 
 function play() {
     
     var url = "http://localhost:3000/bingo/play"
     $.getJSON(url, function (responseData) {
         $("#number").html(responseData.number);
         $(".number-" + responseData.number).addClass("mark")
-        $("#historyRandomNumber").append(responseData.number+", ")
+        numberHistory.push(responseData.number)
+        $("#historyRandomNumber").text(numberHistory.join(","))
         if (responseData.winner != "") {
             setTimeout(function () {
                 alert("Player " + responseData.winner + " Win");
