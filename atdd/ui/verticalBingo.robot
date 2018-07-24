@@ -33,7 +33,7 @@ ${URL}    http://localhost:3000/bingogame
 กดปุ่มเริ่มเกม 
       Click Button    id=startGame
 เข้าสู่หน้าเล่นเกม
-      Wait Until Page Contains    สุ่มเลข
+      Element Text Should Be    id=random    Call
       Element Text Should Be    id=playerOne    A
       Element Text Should Be    id=playerTwo    B
 กดปุ่มสุ่มเลขและต้องได้เลข
@@ -48,7 +48,7 @@ Element should have class
       Should Contain    ${class}    ${target value}
 
 แสดงชื่อผู้ชนะ
-      Alert Should Be Present    Player A Win
+      Wait Until Element Contains    id=winner    Bingo !!!
 
 ปิด Browser
       Close Browser
