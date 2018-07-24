@@ -106,3 +106,39 @@ func Test_PlayHandler_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
 		t.Errorf("expected %v but got %v", expected, actual)
 	}
 }
+
+func Test_ChangeTicketHandler_Input_Name_A_Should_Be_New_Ticket(t *testing.T) {
+	request := httptest.NewRequest("GET", "/bingo/ticket/change?playerName=A", nil)
+	responseRecorder := httptest.NewRecorder()
+	ticket := bingogame.NewTicket(5)
+	oldTicket := bingogame.NewTicket(5)
+	oldTicket = bingogame.MockTicketNumber(ticket, 1)
+	ticket = bingogame.MockTicketNumber(ticket, 3)
+	expectedPlayer := bingogame.Player{
+		Name:   "A",
+		Ticket: ticket,
+	}
+	gameService := service.MockGameService{
+		Game: bingogame.Game{
+			Players: []bingogame.Player{
+				bingogame.Player{Name: "A", Ticket: oldTicket},
+			},
+		},
+	}
+	api := Api{
+		GameService: &gameService,
+	}
+
+	api.ChangeTicketHandler(responseRecorder, request)
+	response := responseRecorder.Result()
+	body, _ := ioutil.ReadAll(response.Body)
+	var actualPlayer bingogame.Player
+	json.Unmarshal(body, &actualPlayer)
+	if expectedPlayer.Name != actualPlayer.Name ||
+		(expectedPlayer.Ticket.Grid[0][0] != actualPlayer.Ticket.Grid[0][0] ||
+			expectedPlayer.Ticket.Grid[4][4] != actualPlayer.Ticket.Grid[4][4] ||
+			expectedPlayer.Ticket.Grid[0][4] != actualPlayer.Ticket.Grid[0][4] ||
+			expectedPlayer.Ticket.Grid[4][0] != actualPlayer.Ticket.Grid[4][0]) {
+		t.Errorf("expected %v but go %v", expectedPlayer.Name, actualPlayer.Name)
+	}
+}
