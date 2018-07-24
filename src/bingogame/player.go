@@ -70,13 +70,11 @@ func (p Player) CheckDiagonal(positionX, positionY int) bool {
 			break
 		}
 	}
-
 	for indexRow, indexColumn := 4, 0; indexRow >= 0; indexRow, indexColumn = indexRow-1, indexColumn+1 {
 		if !p.Ticket.GetGridStatus(indexRow, indexColumn) {
 			isDiagonalRightToLeft = false
 			break
 		}
 	}
-
 	return isDiagonalLeftToRight || isDiagonalRightToLeft
 }
