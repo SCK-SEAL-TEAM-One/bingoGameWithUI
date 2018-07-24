@@ -3,6 +3,7 @@ package api
 import (
 	"bingogame"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"service"
 )
@@ -49,4 +50,12 @@ func (a *Api) PlayHandler(writer http.ResponseWriter, request *http.Request) {
 	playResponse := a.GameService.PlayGame()
 	playJson, _ := json.Marshal(playResponse)
 	writer.Write(playJson)
+}
+
+func (a *Api) ChangeTicketHandler(writer http.ResponseWriter, request *http.Request) {
+	playerName := request.URL.Query().Get("playerName")
+	player := a.GameService.ChangeTicket(playerName)
+	fmt.Printf("Player: %v", player)
+	playerJson, _ := json.Marshal(player)
+	writer.Write(playerJson)
 }
