@@ -21,6 +21,7 @@ func (g *Game) PickUpNumber() int {
 func (g *Game) Play() PlayResponse {
 	playResponse := PlayResponse{}
 	pickupNumber := g.PickUpNumber()
+	playResponse.Number = pickupNumber
 	for index, _ := range g.Players {
 		positionX, positionY := g.Players[index].CheckNumber(pickupNumber)
 		if isInTicket(positionX, positionY) {
@@ -30,7 +31,6 @@ func (g *Game) Play() PlayResponse {
 			}
 		}
 	}
-	playResponse.Number = pickupNumber
 	return playResponse
 }
 
