@@ -5,6 +5,21 @@ $(function() {
 })
 var numberHistory = []
 
+$( "#changeTicketPlayerOne" ).click(function() {
+    var url = "http://localhost:3000/bingo/ticket/change?playerName="+$("#playerOne").html()
+    $.getJSON(url, function(responseData) {
+        $("#ticketPlayerOne").empty()
+        appendTo("#ticketPlayerOne", responseData.ticket)
+    })
+});
+
+$( "#changeTicketPlayerTwo" ).click(function() {
+    var url = "http://localhost:3000/bingo/ticket/change?playerName="+$("#playerTwo").html()
+    $.getJSON(url, function(responseData) {
+        $("#ticketPlayerTwo").empty()
+        appendTo("#ticketPlayerTwo", responseData.ticket)
+    })
+});
 function renderNumerBox() {
     var divCol = "";
     for (var i = 1; i <= 75; i++) {
@@ -37,7 +52,8 @@ function getInfo() {
 }
 
 function play() {
-
+    $('#changeTicketPlayerOne').prop('disabled', true);
+    $('#changeTicketPlayerTwo').prop('disabled', true);
     var url = "http://localhost:3000/bingo/play"
     $.getJSON(url, function(responseData) {
         $("#number").html(responseData.number);
