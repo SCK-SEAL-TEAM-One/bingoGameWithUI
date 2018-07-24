@@ -74,3 +74,27 @@ func Test_PlayGame_Should_Be_Number_9_Winer_Empty(t *testing.T) {
 		t.Errorf("expect %v but got %v", expected, actual)
 	}
 }
+func Test_ChangeTicket_Input_PlayerName_A_Should_Be_Player_A_With_New_Ticket(t *testing.T) {
+
+	ticketBlankPlayerA := bingogame.NewTicket(5)
+	ticketBlankPlayerB := bingogame.NewTicket(5)
+	oldTicket := bingogame.NewTicket(5)
+	oldTicket = bingogame.MockTicketNumber(oldTicket, 1)
+	ticketWithNumberA := bingogame.MockTicketNumber(ticketBlankPlayerA, 1)
+	ticketWithNumberB := bingogame.MockTicketNumber(ticketBlankPlayerB, 2)
+	playerA := bingogame.NewPlayer("A", ticketWithNumberA)
+	playerB := bingogame.NewPlayer("B", ticketWithNumberB)
+	numberBox := bingogame.NewNumberBox(75)
+	numberBox = bingogame.MockNumberBox()
+	allPlayer := []bingogame.Player{playerA, playerB}
+	game := bingogame.NewGame(allPlayer, numberBox)
+	gameService := service.GameService{Game: game}
+	actual := gameService.ChangeTicket("A")
+
+	if oldTicket.Grid[0][0] == actual.Ticket.Grid[0][0] &&
+		oldTicket.Grid[0][4] == actual.Ticket.Grid[0][4] &&
+		oldTicket.Grid[4][0] == actual.Ticket.Grid[4][0] &&
+		oldTicket.Grid[4][4] == actual.Ticket.Grid[4][4] {
+		t.Errorf("expect \n%v but got \n%v", oldTicket, actual)
+	}
+}
