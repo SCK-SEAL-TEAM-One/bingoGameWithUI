@@ -1,9 +1,9 @@
 $(function () {
-    random()
+    getInfo()
     $('#random').click(play)
 })
-
-function random() {
+var numberHistory = [] 
+function getInfo() {
     var url = "http://localhost:3000/bingo/info"
     $.getJSON(url, function (responseData) {
         var playerOne = responseData.playerOne
@@ -12,9 +12,11 @@ function random() {
         $("#playerTwo").text(playerTwo.name)
         appendTo("#ticketPlayerOne", playerOne.ticket)
         appendTo("#ticketPlayerTwo", playerTwo.ticket)
+        numberHistory = responseData.historyPickUp
+        $("#historyRandomNumber").text(numberHistory.join(","))
     })
 }
-var numberHistory = [] 
+
 function play() {
     
     var url = "http://localhost:3000/bingo/play"
