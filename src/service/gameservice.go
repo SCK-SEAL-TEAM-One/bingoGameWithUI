@@ -13,6 +13,7 @@ type Service interface {
 	NewGame(playerOneName, playerTwoName string) error
 	GetPlayerInfo() PlayerInfoResponse
 	PlayGame() bingogame.PlayResponse
+	ChangeTicket(playerName string) bingogame.Player
 }
 
 type PlayerInfoResponse struct {
@@ -50,6 +51,18 @@ func (g *MockGameService) PlayGame() bingogame.PlayResponse {
 	return g.Game.Play()
 }
 
+func (g *MockGameService) ChangeTicket(playerName string) bingogame.Player {
+	player := bingogame.Player{}
+	for index := range g.Game.Players {
+		if g.Game.Players[index].Name == playerName {
+			player = g.Game.Players[index]
+			player.Ticket = bingogame.MockTicketNumber(player.Ticket, 3)
+			break
+		}
+	}
+	return player
+}
+
 type GameService struct {
 	Game bingogame.Game
 }
@@ -77,4 +90,15 @@ func (g GameService) GetPlayerInfo() PlayerInfoResponse {
 
 func (g *GameService) PlayGame() bingogame.PlayResponse {
 	return g.Game.Play()
+}
+func (g *GameService) ChangeTicket(playerName string) bingogame.Player {
+	player := bingogame.Player{}
+	for index := range g.Game.Players {
+		if g.Game.Players[index].Name == playerName {
+			player = g.Game.Players[index]
+			player.Ticket = bingogame.GenerateTicketNumber(player.Ticket)
+			break
+		}
+	}
+	return player
 }
