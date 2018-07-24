@@ -30,7 +30,7 @@ func (p Player) CheckNumber(number int) (int, int) {
 }
 
 func (p Player) GetBingo(positionX, positionY int) bool {
-	return p.CheckHorizental(positionX, positionY) || p.CheckDiagonal(positionX, positionY) || p.CheckVertical(positionX, positionY)
+	return p.CheckHorizontal(positionX, positionY) || p.CheckDiagonal(positionX, positionY) || p.CheckVertical(positionX, positionY)
 }
 
 func (p Player) CheckVertical(positionX, positionY int) bool {
@@ -48,7 +48,7 @@ func (p Player) CheckVertical(positionX, positionY int) bool {
 	return false
 }
 
-func (p Player) CheckHorizental(positionX, positionY int) bool {
+func (p Player) CheckHorizontal(positionX, positionY int) bool {
 	var number int
 	positionX -= 1
 	for columnIndex := 0; columnIndex < p.Ticket.SizeY; columnIndex++ {

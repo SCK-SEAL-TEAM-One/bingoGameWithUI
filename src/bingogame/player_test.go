@@ -141,7 +141,7 @@ func Test_CheckVertical_Input_X_1_Y_4_Should_Be_False(t *testing.T) {
 	}
 }
 
-func Test_CheckHorizental_Input_X_1_Y_4_Should_Be_False(t *testing.T) {
+func Test_CheckHorizontal_Input_X_1_Y_4_Should_Be_False(t *testing.T) {
 	positionX := 1
 	positionY := 4
 	player := Player{
@@ -160,13 +160,13 @@ func Test_CheckHorizental_Input_X_1_Y_4_Should_Be_False(t *testing.T) {
 	}
 	expectedBingo := false
 
-	actualBingo := player.CheckHorizental(positionX, positionY)
+	actualBingo := player.CheckHorizontal(positionX, positionY)
 
 	if expectedBingo != actualBingo {
 		t.Errorf("expected %v but got %v", expectedBingo, actualBingo)
 	}
 }
-func Test_CheckHorizental_Input_X_2_Y_4_Should_Be_True(t *testing.T) {
+func Test_CheckHorizontal_Input_X_2_Y_4_Should_Be_True(t *testing.T) {
 	positionX := 2
 	positionY := 4
 	player := Player{
@@ -184,7 +184,7 @@ func Test_CheckHorizental_Input_X_2_Y_4_Should_Be_True(t *testing.T) {
 		},
 	}
 	expectedBingo := true
-	actualBingo := player.CheckHorizental(positionX, positionY)
+	actualBingo := player.CheckHorizontal(positionX, positionY)
 	if expectedBingo != actualBingo {
 		t.Errorf("expected %v but got %v", expectedBingo, actualBingo)
 	}
