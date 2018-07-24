@@ -50,3 +50,10 @@ func (a *Api) PlayHandler(writer http.ResponseWriter, request *http.Request) {
 	playJson, _ := json.Marshal(playResponse)
 	writer.Write(playJson)
 }
+
+func (a *Api) ChangeTicketHandler(writer http.ResponseWriter, request *http.Request) {
+	playerName := request.URL.Query().Get("playerName")
+	player := a.GameService.ChangeTicket(playerName)
+	playerJson, _ := json.Marshal(player)
+	writer.Write(playerJson)
+}
