@@ -8,8 +8,8 @@ func NewPlayer(name string, ticket Ticket) Player {
 }
 
 func (p *Player) Mark(positionX, positionY int) bool {
-	positionX -= 1
-	positionY -= 1
+	positionX--
+	positionY--
 	p.Ticket.SetGridStatus(positionX, positionY, true)
 
 	if p.Ticket.Grid[positionX][positionY].Status == false {
@@ -30,15 +30,14 @@ func (p Player) CheckNumber(number int) (int, int) {
 }
 
 func (p Player) GetBingo(positionX, positionY int) bool {
-	return p.CheckHorizontal(positionX, positionY) || p.CheckDiagonal(positionX, positionY) || p.CheckVertical(positionX, positionY)
+	return p.CheckHorizontal(positionX) || p.CheckDiagonal(positionX, positionY) || p.CheckVertical(positionY)
 }
 
-func (p Player) CheckVertical(positionX, positionY int) bool {
-	positionX--
+func (p Player) CheckVertical(positionY int) bool {
 	positionY--
 	var number int
 	for rowIndex := range p.Ticket.Grid {
-		if p.Ticket.Grid[rowIndex][positionY].Status == true {
+		if p.Ticket.GetGridStatus(rowIndex, positionY) {
 			number++
 			if number == p.Ticket.SizeX {
 				return true
@@ -48,11 +47,11 @@ func (p Player) CheckVertical(positionX, positionY int) bool {
 	return false
 }
 
-func (p Player) CheckHorizontal(positionX, positionY int) bool {
+func (p Player) CheckHorizontal(positionX int) bool {
 	var number int
-	positionX -= 1
+	positionX--
 	for columnIndex := 0; columnIndex < p.Ticket.SizeY; columnIndex++ {
-		if p.Ticket.Grid[positionX][columnIndex].Status == true {
+		if p.Ticket.GetGridStatus(positionX, columnIndex) {
 			number++
 			if number == p.Ticket.SizeY {
 				return true
