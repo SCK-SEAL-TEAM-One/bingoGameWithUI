@@ -12,40 +12,51 @@
 
 <body>
     <div class="row">
-        <img style="height: 200px" src="https://aws-pbl-s3.s3.amazonaws.com/www.2ndchanceplay.com/milottery/images/uploads/promotions/logo_4.png">
-    </div>
-    <div class="row">
-        <div class="col" style="padding-left: 100px">
-            <p id="playerOne"></p>
-            <table class="table">
-                <tbody id="ticketPlayerOne">
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="./">
+                        <img src="./logo.png">
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <h1 id="winner" style="padding-top: 5%;padding-left: 20%; color:#28a745"></h1>
+                </div>
 
-                </tbody>
-            </table>
-        </div>
-        <div class="col">
-            <div style="padding-left: 40%;padding-top:30%">
-                    <div id="number" class="numberCircle"></div>
-                    <button id="random">สุ่มเลข</button>
             </div>
-           
-        </div>
-        <div class="col" style="padding-right: 100px">
-            <p id="playerTwo"></p>
-            <table class="table">
-                <tbody id="ticketPlayerTwo">
+            <div class="row" id="ticket">
+                <div class="col-sm-6" style="padding-left: 100px">
+                    <h3 id="playerOne"></h3>
+                    <table class="table">
+                        <tbody id="ticketPlayerOne">
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-6" style="padding-right: 100px">
+                    <h3 id="playerTwo"></h3>
+                    <table class="table">
+                        <tbody id="ticketPlayerTwo">
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="row" style="padding-left: 40%">
+                <div id="number" class="numberCircle"></div>
+            </div>
+            <div class="row" style="padding-left: 42%">
+                <button id="random" class="btn btn-primary">Call</button>
+            </div>
+            <br>
+            <div class="row" id="numberBox">
+            </div>
         </div>
     </div>
-    <div style="padding-left: 100px" class="row">
-        <h3>History Number
-        </h3>
-    </div>
-    <div style="padding-left: 100px" class="row" id="historyRandomNumber">
-    </div>
-    
 </body>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bingoGame.js"></script>
