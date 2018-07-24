@@ -21,7 +21,7 @@ func (p *Player) Mark(positionX, positionY int) bool {
 func (p Player) CheckNumber(number int) (int, int) {
 	for rowIndex := range p.Ticket.Grid {
 		for columnIndex := range p.Ticket.Grid[rowIndex] {
-			if number == p.Ticket.Grid[rowIndex][columnIndex].Number {
+			if number == p.Ticket.GetGridNumber(rowIndex, columnIndex) {
 				return rowIndex + 1, columnIndex + 1
 			}
 		}
