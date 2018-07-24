@@ -17,7 +17,7 @@ func Test_StartGameHandler(t *testing.T) {
 	expectedRespondstatus := 200
 	request := httptest.NewRequest("POST", "/bingo/start", bytes.NewBuffer(requestByte))
 	responseRecorder := httptest.NewRecorder()
-	api := Api{}
+	api := Api{GameService: &service.GameService{}}
 
 	api.StartGameHandler(responseRecorder, request)
 
@@ -44,7 +44,7 @@ func Test_GetPlayersInfoHandler_Should_Be_InfoResponse(t *testing.T) {
 	expectedResponseString, _ := json.Marshal(expectedResponse)
 	numberBox := []int{9, 2, 1, 3, 7, 3, 6, 2, 3, 6}
 	api := Api{
-		GameService: service.GameService{
+		GameService: &service.GameService{
 			Game: bingogame.Game{
 				Players: []bingogame.Player{
 					playerOne,
@@ -93,7 +93,7 @@ func Test_PlayHandler_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
 	}
 
 	api := Api{
-		GameService: gameService,
+		GameService: &gameService,
 	}
 	api.PlayHandler(responseRecorder, request)
 

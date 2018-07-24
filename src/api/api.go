@@ -13,7 +13,7 @@ type StartGameRequest struct {
 }
 
 type Api struct {
-	GameService service.GameService
+	GameService service.Service
 }
 
 type PlayerInfoResponse struct {

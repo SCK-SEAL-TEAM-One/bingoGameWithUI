@@ -9,7 +9,7 @@ func Shuffle(startNumber, endNumber int) []int {
 	length := endNumber - startNumber + 1
 	shuffle := make([]int, length)
 	for index := 0; index < length; index++ {
-		shuffle[index] = index + 1
+		shuffle[index] = index + startNumber
 	}
 	for index := len(shuffle) - 1; index > 0; index-- {
 		secondsSince1970 := time.Now().UTC().UnixNano()
