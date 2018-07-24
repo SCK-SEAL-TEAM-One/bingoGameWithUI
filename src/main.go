@@ -12,6 +12,7 @@ func main() {
 	http.HandleFunc("/bingo/start", api.StartGameHandler)
 	http.HandleFunc("/bingo/info", api.GetPlayersInfoHandler)
 	http.HandleFunc("/bingo/play", api.PlayHandler)
+	http.HandleFunc("/bingo/ticket/change", api.ChangeTicketHandler)
 	fs := http.FileServer(http.Dir("./public"))
 	http.Handle("/bingogame/", http.StripPrefix("/bingogame/", fs))
 
