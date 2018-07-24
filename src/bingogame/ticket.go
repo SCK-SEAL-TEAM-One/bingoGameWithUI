@@ -1,5 +1,7 @@
 package bingogame
 
+const half = 2
+
 func NewTicket(numberOfGrid int) Ticket {
 	grid := make([][]State, numberOfGrid)
 	for index := 0; index < numberOfGrid; index++ {
@@ -15,16 +17,16 @@ func NewTicket(numberOfGrid int) Ticket {
 }
 
 func GenerateTicketNumber(ticket Ticket) Ticket {
-	centerColumn := ticket.SizeY / 2
-	centerRow := ticket.SizeX / 2
+	centerColumn := ticket.SizeY / half
+	centerRow := ticket.SizeX / half
 
 	for indexRow := range ticket.Grid {
 		startNumber := 1 + (indexRow * 15)
 		endNumber := 15 + (indexRow * 15)
-		suffleNumber := Shuffle(startNumber, endNumber)
+		shuffleNumber := Shuffle(startNumber, endNumber)
 		for indexColumn := range ticket.Grid[indexRow] {
 			var value int
-			value, suffleNumber = suffleNumber[0], suffleNumber[1:]
+			value, shuffleNumber = shuffleNumber[0], shuffleNumber[1:]
 			if !(indexRow == centerRow && indexColumn == centerColumn) {
 				ticket.SetGridNumber(indexColumn, indexRow, value)
 			}
