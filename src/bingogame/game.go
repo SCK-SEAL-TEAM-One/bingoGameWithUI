@@ -1,5 +1,7 @@
 package bingogame
 
+import "strings"
+
 const notfound = -1
 
 func NewNumberBox(endNumber int) []int {
@@ -19,18 +21,21 @@ func (g *Game) PickUpNumber() int {
 }
 
 func (g *Game) Play() PlayResponse {
+	winners := []string{}
 	playResponse := PlayResponse{}
 	pickupNumber := g.PickUpNumber()
 	playResponse.Number = pickupNumber
+
 	for index, _ := range g.Players {
 		positionX, positionY := g.Players[index].CheckNumber(pickupNumber)
 		if isInTicket(positionX, positionY) {
 			g.Players[index].Mark(positionX, positionY)
 			if g.Players[index].GetBingo(positionX, positionY) {
-				playResponse.Winner = g.Players[index].Name
+				winners = append(winners, g.Players[index].Name)
 			}
 		}
 	}
+	playResponse.Winner = strings.Join(winners, ", ")
 	return playResponse
 }
 
