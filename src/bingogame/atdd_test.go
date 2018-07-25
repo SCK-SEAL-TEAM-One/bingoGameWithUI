@@ -16,130 +16,17 @@ func Test_AcceptanceTest_VerticalBingoRule_Input_Player_A_And_B_PlayRound_8_Shou
 	numberBox = MockNumberBox()
 	allPlayer := []Player{playerA, playerB}
 	game := NewGame(allPlayer, numberBox)
-	bingoPlayer := ""
-	pickupNumber := game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 := game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 := game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
-	pickupNumber = game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 = game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 = game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
-	pickupNumber = game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 = game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 = game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
-	pickupNumber = game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 = game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 = game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
-	pickupNumber = game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 = game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 = game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
-	pickupNumber = game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 = game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 = game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
-	pickupNumber = game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 = game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 = game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
-	pickupNumber = game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 = game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 = game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
+	game.Play()
+	game.Play()
+	game.Play()
+	game.Play()
+	game.Play()
+	game.Play()
+	game.Play()
+	actualResult := game.Play()
 
 	expectedBingoPlayer := "A"
-	actualBingoPlayer := bingoPlayer
+	actualBingoPlayer := actualResult.Winner
 
 	if expectedBingoPlayer != actualBingoPlayer {
 		t.Errorf("expected player is %s but it got %s", expectedBingoPlayer, actualBingoPlayer)
@@ -157,99 +44,14 @@ func Test_AcceptanceTest_VerticalCenterBingoRule_Input_Player_A_And_B_PlayRound_
 	numberBox = MockNumberBoxForCase2()
 	allPlayer := []Player{playerA, playerB}
 	game := NewGame(allPlayer, numberBox)
-	bingoPlayer := ""
-	pickupNumber := game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 := game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 := game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
-	pickupNumber = game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 = game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 = game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
-	pickupNumber = game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 = game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 = game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
-	pickupNumber = game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 = game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 = game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
-	pickupNumber = game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 = game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 = game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
-	pickupNumber = game.PickUpNumber()
-	positionXPlayer1, positionYPlayer1 = game.Players[0].CheckNumber(pickupNumber)
-	if positionXPlayer1 != -1 && positionYPlayer1 != -1 {
-		game.Players[0].Mark(positionXPlayer1, positionYPlayer1)
-		if game.Players[0].GetBingo(positionXPlayer1, positionYPlayer1) {
-			bingoPlayer = game.Players[0].Name
-		}
-	}
-	positionXPlayer2, positionYPlayer2 = game.Players[1].CheckNumber(pickupNumber)
-	if positionXPlayer2 != -1 && positionYPlayer2 != -1 {
-		game.Players[1].Mark(positionXPlayer2, positionYPlayer2)
-		if game.Players[1].GetBingo(positionXPlayer2, positionYPlayer2) {
-			bingoPlayer = game.Players[1].Name
-		}
-	}
+	game.Play()
+	game.Play()
+	game.Play()
+	game.Play()
+	game.Play()
+	actualResult := game.Play()
 	expectedBingoPlayer := "B"
-	actualBingoPlayer := bingoPlayer
+	actualBingoPlayer := actualResult.Winner
 
 	if expectedBingoPlayer != actualBingoPlayer {
 		t.Errorf("expected player is %s but it got %s", expectedBingoPlayer, actualBingoPlayer)
