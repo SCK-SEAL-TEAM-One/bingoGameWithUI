@@ -14,8 +14,7 @@ func Test_GetPlayerInfo_Should_Be_PlayerInfoResponse(t *testing.T) {
 	playerOne := bingogame.NewPlayer("A", ticketWithNumberOne)
 	playerTwo := bingogame.NewPlayer("B", ticketWithNumberTwo)
 	expectedResponse := service.PlayerInfoResponse{
-		PlayerOne:     playerOne,
-		PlayerTwo:     playerTwo,
+		Players:       []bingogame.Player{playerOne, playerTwo},
 		HistoryPickUp: []int{},
 	}
 	numberBox := []int{9, 2, 1, 3, 7, 3, 6, 2, 3, 6}
@@ -32,8 +31,8 @@ func Test_GetPlayerInfo_Should_Be_PlayerInfoResponse(t *testing.T) {
 
 	actual := gameService.GetPlayerInfo()
 
-	if expectedResponse.PlayerOne.Name != actual.PlayerOne.Name &&
-		expectedResponse.PlayerTwo.Name != actual.PlayerTwo.Name {
+	if expectedResponse.Players[0].Name != actual.Players[0].Name &&
+		expectedResponse.Players[1].Name != actual.Players[1].Name {
 		t.Errorf("expected %v but got %v", expectedResponse, actual)
 
 	}
