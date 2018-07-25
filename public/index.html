@@ -16,14 +16,20 @@
         <div>
             <h1>NewPlayer</h1>
         </div>
-        <div>
-            <h3>Player1</h3>
-            <label>Name : </label>
-            <input type="text" id="playerOne" autofocus>
-            <h3>Player2</h3>
-            <label>Name : </label>
-            <input type="text" id="playerTwo">
+        <div id="player" >
+            <div>
+                <h3>Player1</h3>
+                <label>Name : </label>
+                <input type="text" class="playerName" id="player1" autofocus>
+            </div>
+            <div>
+                <h3>Player2</h3>
+                <label>Name : </label>
+                <input type="text" class="playerName" id="player2" autofocus>
+            </div>
         </div>
+        <button id="addPlayer">Add Player</button>
+        <button id="removePlayer" disabled>Remove Player</button>
         <button id="startGame">Start Game</button>
     </div>
 </body>
