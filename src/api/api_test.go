@@ -12,7 +12,9 @@ import (
 )
 
 func Test_StartGameHandler(t *testing.T) {
-	requestPlayers := StartGameRequest{PlayerOne: "A", PlayerTwo: "B"}
+	requestPlayers := StartGameRequest{
+		PlayerNames: []string{"A", "B"},
+	}
 	requestByte, _ := json.Marshal(requestPlayers)
 	expectedRespondstatus := 200
 	request := httptest.NewRequest("POST", "/bingo/start", bytes.NewBuffer(requestByte))

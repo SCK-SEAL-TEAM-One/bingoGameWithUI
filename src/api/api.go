@@ -8,8 +8,7 @@ import (
 )
 
 type StartGameRequest struct {
-	PlayerOne string `json:"playerOne"`
-	PlayerTwo string `json:"playerTwo"`
+	PlayerNames []string `json:"players"`
 }
 
 type Api struct {
@@ -30,7 +29,7 @@ func (a *Api) StartGameHandler(writer http.ResponseWriter, request *http.Request
 		return
 	}
 
-	err = a.GameService.NewGame(requestGame.PlayerOne, requestGame.PlayerTwo)
+	err = a.GameService.NewGame(requestGame.PlayerNames)
 	if err != nil {
 		http.Error(writer, err.Error(), http.StatusInternalServerError)
 		return

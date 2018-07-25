@@ -10,7 +10,7 @@ const (
 )
 
 type Service interface {
-	NewGame(playerOneName, playerTwoName string) error
+	NewGame(playerNames []string) error
 	GetPlayerInfo() PlayerInfoResponse
 	PlayGame() bingogame.PlayResponse
 	ChangeTicket(playerName string) bingogame.Player
@@ -26,15 +26,15 @@ type MockGameService struct {
 	Game bingogame.Game
 }
 
-func (gs *MockGameService) NewGame(playerOneName, playerTwoName string) error {
-	ticket1 := bingogame.NewTicket(numberOfGrid)
-	ticket2 := bingogame.NewTicket(numberOfGrid)
-	ticket1 = bingogame.MockTicketNumber(ticket1, 1)
-	ticket2 = bingogame.MockTicketNumber(ticket2, 2)
-	player1 := bingogame.NewPlayer(playerOneName, ticket1)
-	player2 := bingogame.NewPlayer(playerTwoName, ticket2)
+func (gs *MockGameService) NewGame(playerNames []string) error {
+	allPlayer := []bingogame.Player{}
+	for index, playerName := range playerNames {
+		ticket := bingogame.NewTicket(numberOfGrid)
+		ticket = bingogame.MockTicketNumber(ticket, index+1)
+		player := bingogame.NewPlayer(playerName, ticket)
+		allPlayer = append(allPlayer, player)
+	}
 	numberBox := bingogame.MockNumberBox()
-	allPlayer := []bingogame.Player{player1, player2}
 	gs.Game = bingogame.NewGame(allPlayer, numberBox)
 	return nil
 }
@@ -67,15 +67,15 @@ type GameService struct {
 	Game bingogame.Game
 }
 
-func (gs *GameService) NewGame(playerOneName, playerTwoName string) error {
-	ticket1 := bingogame.NewTicket(numberOfGrid)
-	ticket2 := bingogame.NewTicket(numberOfGrid)
-	ticket1 = bingogame.GenerateTicketNumber(ticket1)
-	ticket2 = bingogame.GenerateTicketNumber(ticket2)
-	player1 := bingogame.NewPlayer(playerOneName, ticket1)
-	player2 := bingogame.NewPlayer(playerTwoName, ticket2)
+func (gs *GameService) NewGame(playerNames []string) error {
+	allPlayer := []bingogame.Player{}
+	for _, playerName := range playerNames {
+		ticket := bingogame.NewTicket(numberOfGrid)
+		ticket = bingogame.GenerateTicketNumber(ticket)
+		player := bingogame.NewPlayer(playerName, ticket)
+		allPlayer = append(allPlayer, player)
+	}
 	numberBox := bingogame.NewNumberBox(numberInBox)
-	allPlayer := []bingogame.Player{player1, player2}
 	gs.Game = bingogame.NewGame(allPlayer, numberBox)
 	return nil
 }

@@ -40,13 +40,14 @@ func Test_GetPlayerInfo_Should_Be_PlayerInfoResponse(t *testing.T) {
 }
 
 func Test_NewGame_Input_PlayerNameOne_A_And_PlayerNameTwo_B_Should_Be_Error_Nil(t *testing.T) {
-	playerNameOne := "A"
-	playerNameTwo := "B"
+	playerNames := []string{"A", "B"}
 	gameService := service.GameService{}
 
-	actual := gameService.NewGame(playerNameOne, playerNameTwo)
+	actual := gameService.NewGame(playerNames)
 
-	if actual != nil && gameService.Game.Players[0].Name != playerNameOne && gameService.Game.Players[1].Name != playerNameTwo {
+	if actual != nil &&
+		gameService.Game.Players[0].Name != playerNames[0] &&
+		gameService.Game.Players[1].Name != playerNames[1] {
 		t.Errorf("expectedError nil but got %v", actual)
 	}
 }
