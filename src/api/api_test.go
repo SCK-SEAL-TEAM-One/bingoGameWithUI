@@ -38,9 +38,8 @@ func Test_GetPlayersInfoHandler_Should_Be_InfoResponse(t *testing.T) {
 	ticketWithNumberTwo := bingogame.MockTicketNumber(ticketTwo, 2)
 	playerOne := bingogame.NewPlayer("A", ticketWithNumberOne)
 	playerTwo := bingogame.NewPlayer("B", ticketWithNumberTwo)
-	expectedResponse := PlayerInfoResponse{
-		PlayerOne:     playerOne,
-		PlayerTwo:     playerTwo,
+	expectedResponse := service.PlayerInfoResponse{
+		Players:       []bingogame.Player{playerOne, playerTwo},
 		HistoryPickUp: []int{},
 	}
 	expectedResponseString, _ := json.Marshal(expectedResponse)

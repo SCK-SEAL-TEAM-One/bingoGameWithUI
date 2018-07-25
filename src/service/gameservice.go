@@ -17,9 +17,8 @@ type Service interface {
 }
 
 type PlayerInfoResponse struct {
-	PlayerOne     bingogame.Player `json:"playerOne"`
-	PlayerTwo     bingogame.Player `json:"playerTwo"`
-	HistoryPickUp []int            `json:"historyPickUp"`
+	Players       []bingogame.Player `json:"players"`
+	HistoryPickUp []int              `json:"historyPickUp"`
 }
 
 type MockGameService struct {
@@ -41,8 +40,7 @@ func (gs *MockGameService) NewGame(playerNames []string) error {
 
 func (g MockGameService) GetPlayerInfo() PlayerInfoResponse {
 	return PlayerInfoResponse{
-		PlayerOne:     g.Game.Players[0],
-		PlayerTwo:     g.Game.Players[1],
+		Players:       g.Game.Players,
 		HistoryPickUp: g.Game.HistoryPickUp,
 	}
 }
@@ -82,8 +80,7 @@ func (gs *GameService) NewGame(playerNames []string) error {
 
 func (g GameService) GetPlayerInfo() PlayerInfoResponse {
 	return PlayerInfoResponse{
-		PlayerOne:     g.Game.Players[0],
-		PlayerTwo:     g.Game.Players[1],
+		Players:       g.Game.Players,
 		HistoryPickUp: g.Game.HistoryPickUp,
 	}
 }

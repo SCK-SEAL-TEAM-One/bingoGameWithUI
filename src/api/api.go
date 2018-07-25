@@ -1,7 +1,6 @@
 package api
 
 import (
-	"bingogame"
 	"encoding/json"
 	"net/http"
 	"service"
@@ -13,12 +12,6 @@ type StartGameRequest struct {
 
 type Api struct {
 	GameService service.Service
-}
-
-type PlayerInfoResponse struct {
-	PlayerOne     bingogame.Player `json:"playerOne"`
-	PlayerTwo     bingogame.Player `json:"playerTwo"`
-	HistoryPickUp []int            `json:"historyPickUp"`
 }
 
 func (a *Api) StartGameHandler(writer http.ResponseWriter, request *http.Request) {
