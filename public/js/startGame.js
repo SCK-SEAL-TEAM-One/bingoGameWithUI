@@ -8,7 +8,7 @@ function startGame() {
         playerOne: $('#playerOne').val(),
         playerTwo: $('#playerTwo').val()
     }
-    $.post(url, JSON.stringify(parameter), function (data, status, xhr) {
+    $.post(url, JSON.stringify(parameter), function (data, status) {
         if (status == "success") {
             window.location = "game.html"
         }

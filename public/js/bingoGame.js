@@ -6,7 +6,7 @@ $(function() {
 var numberHistory = []
 
 $( "#changeTicketPlayerOne" ).click(function() {
-    var url = "http://localhost:3000/bingo/ticket/change?playerName="+$("#playerOne").html()
+    var url = "http://localhost:3000/bingo/ticket/change?playerName="+$("#playerOne").text()
     $.getJSON(url, function(responseData) {
         $("#ticketPlayerOne").empty()
         appendTo("#ticketPlayerOne", responseData.ticket)
@@ -14,7 +14,7 @@ $( "#changeTicketPlayerOne" ).click(function() {
 });
 
 $( "#changeTicketPlayerTwo" ).click(function() {
-    var url = "http://localhost:3000/bingo/ticket/change?playerName="+$("#playerTwo").html()
+    var url = "http://localhost:3000/bingo/ticket/change?playerName="+$("#playerTwo").text()
     $.getJSON(url, function(responseData) {
         $("#ticketPlayerTwo").empty()
         appendTo("#ticketPlayerTwo", responseData.ticket)
@@ -47,7 +47,7 @@ function getInfo() {
             $(".history-" + responseData.historyPickUp[indexHistory]).removeClass("btn-warning")
             $(".history-" + responseData.historyPickUp[indexHistory]).addClass("btn-success")
         }
-        $("#number").html(responseData.historyPickUp[responseData.historyPickUp.length - 1]);
+        $("#number").text(responseData.historyPickUp[responseData.historyPickUp.length - 1]);
     })
 }
 
