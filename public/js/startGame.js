@@ -27,11 +27,14 @@ function checkEmptyName() {
 }
 
 function startGame() {
+    players = []
     if(checkEmptyName() == true && checkDuplicateName() == true){
         var url = "http://localhost:3000/bingo/start"
+        for (var indexName=0; indexName <  $('.playerName').length; indexName++){
+            players.push($($('.playerName')[indexName]).val())
+        }
         var parameter = {
-            playerOne: $('#player1').val(),
-            playerTwo: $('#player2').val()
+            players: players
         }
         $.post(url, JSON.stringify(parameter), function (data, status, xhr) {
             if (status == "success") {
