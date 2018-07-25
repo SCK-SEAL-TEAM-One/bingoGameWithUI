@@ -39,7 +39,7 @@ function startGame() {
             }
         })
     }else{
-        alert("ชื่อผิดพลาด")
+        alert("กรุณาตรวจสอบชื่อผู้เล่น")
     }
 }
 
