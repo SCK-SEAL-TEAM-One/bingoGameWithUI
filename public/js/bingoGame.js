@@ -5,21 +5,6 @@ $(function() {
 })
 var numberHistory = []
 
-$( "#changeTicketPlayerOne" ).click(function() {
-    var url = "http://localhost:3000/bingo/ticket/change?playerName="+$("#playerOne").text()
-    $.getJSON(url, function(responseData) {
-        $("#ticketPlayerOne").empty()
-        appendTo("#ticketPlayerOne", responseData.ticket)
-    })
-});
-
-$( "#changeTicketPlayerTwo" ).click(function() {
-    var url = "http://localhost:3000/bingo/ticket/change?playerName="+$("#playerTwo").text()
-    $.getJSON(url, function(responseData) {
-        $("#ticketPlayerTwo").empty()
-        appendTo("#ticketPlayerTwo", responseData.ticket)
-    })
-});
 function renderNumerBox() {
     var divCol = "";
     for (var i = 1; i <= 75; i++) {
@@ -37,23 +22,16 @@ function renderNumerBox() {
 function getInfo() {
     var url = "http://localhost:3000/bingo/info"
     $.getJSON(url, function(responseData) {
-        var playerOne = responseData.playerOne
-        var playerTwo = responseData.playerTwo
-        $("#playerOne").text(playerOne.name)
-        $("#playerTwo").text(playerTwo.name)
-        appendTo("#ticketPlayerOne", playerOne.ticket)
-        appendTo("#ticketPlayerTwo", playerTwo.ticket)
-        for (var indexHistory = 0; indexHistory <= responseData.historyPickUp.length; indexHistory++) {
-            $(".history-" + responseData.historyPickUp[indexHistory]).removeClass("btn-warning")
-            $(".history-" + responseData.historyPickUp[indexHistory]).addClass("btn-success")
+        for (var indexPlayer = 0; indexPlayer<responseData.players.length;indexPlayer++){
+            var player = responseData.players[indexPlayer]
+            appendToTicket(responseData.players[indexPlayer],indexPlayer)
         }
-        $("#number").text(responseData.historyPickUp[responseData.historyPickUp.length - 1]);
+        getHistory(responseData.historyPickUp)   
     })
 }
 
 function play() {
-    $('#changeTicketPlayerOne').prop('disabled', true);
-    $('#changeTicketPlayerTwo').prop('disabled', true);
+    $('.changeTicketButton').prop('disabled', true);
     var url = "http://localhost:3000/bingo/play"
     $.getJSON(url, function(responseData) {
         $("#number").html(responseData.number);
@@ -66,7 +44,6 @@ function play() {
             setTimeout(function() {
                 $("#winner").html(responseData.winner + "  Bingo !!!")
             }, 500)
-
         }
     })
 }
@@ -88,10 +65,39 @@ function appendTo(ticketName, ticket) {
                 }
                 className += "'"
                 tr.append("<td " + className + ">" + grid[indexRow][indexColumn].number + "</td>")
-
             }
 
         }
         $(ticketName).append(tr)
     }
+}
+
+function appendToTicket(player,index) {
+    $("#ticket").append('<div class="col-sm-6" style="padding-left: 100px">'+
+                        ' <div class="row" style="padding-left: 35%">'+
+                        '   <h3 id="player'+(index+1)+'">'+player.name+'</h3>   &nbsp;&nbsp;&nbsp;&nbsp;'+   
+                        '<button id="changeTicketPlayer'+(index+1)+'"class="btn btn-primary changeTicketButton" onclick="changeTicket(\''+player.name+'\','+(index+1)+')">Change Ticket</button>'+
+                        ' </div><br>'+
+                        ' <table class="table">'+
+                        '   <tbody id="ticketPlayer'+(index+1)+'">'+
+                        '    </tbody>'+
+                        '</table>'+
+                        '  </div>')
+   appendTo("#ticketPlayer"+(index+1), player.ticket)
+}
+
+function getHistory(historyData){
+    for (var indexHistory = 0; indexHistory <= historyData.length; indexHistory++) {
+        $(".history-" + historyData[indexHistory]).removeClass("btn-warning")
+        $(".history-" + historyData[indexHistory]).addClass("btn-success")
+    }
+    $("#number").text(historyData[historyData.length - 1]);
+}
+
+function changeTicket(name,index){
+    var url = "http://localhost:3000/bingo/ticket/change?playerName="+name
+    $.getJSON(url, function(responseData) {
+        $("#ticketPlayer"+index).empty()
+        appendTo("#ticketPlayer"+index, responseData.ticket)
+    })
 }

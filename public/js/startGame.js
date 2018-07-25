@@ -51,7 +51,7 @@ function addPlayer(){
     $('#player').append(
                 '<div><h3>Player'+countPlayer+'</h3>'+
                 '<label>Name : </label>'+
-                '<input type="text" id="player'+countPlayer+'" autofocus></div>')
+                '<input type="text" class="playerName"  id="player'+countPlayer+'" autofocus></div>')
     if (countPlayer == 2){
         $('#removePlayer').prop('disabled', true);
     }else{
