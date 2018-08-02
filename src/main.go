@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	api := apiPackage.Api{GameService: &service.GameService{}}
+	api := apiPackage.Api{GameService: &service.MockGameService{}}
 	http.HandleFunc("/bingo/start", api.StartGameHandler)
 	http.HandleFunc("/bingo/info", api.GetPlayersInfoHandler)
 	http.HandleFunc("/bingo/play", api.PlayHandler)

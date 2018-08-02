@@ -26,16 +26,16 @@ ${URL}    http://localhost:3000/bingogame
      Open Browser    ${URL}    chrome
 ใส่ชื่อผู้เล่นคนแรก 
       [Arguments]    ${name}
-      Input Text    id=playerOne    ${name}
+      Input Text    id=player1    ${name}
 ใส่ชื่อผู้เล่นคนที่สอง
       [Arguments]    ${name}
-      Input Text    id=playerTwo    ${name}
+      Input Text    id=player2    ${name}
 กดปุ่มเริ่มเกม 
       Click Button    id=startGame
 เข้าสู่หน้าเล่นเกม
       Element Text Should Be    id=random    Call
-      Element Text Should Be    id=playerOne    A
-      Element Text Should Be    id=playerTwo    B
+      Element Text Should Be    id=player1    A
+      Element Text Should Be    id=player2    B
 กดปุ่มสุ่มเลขและต้องได้เลข
       [Arguments]    ${number}
       Click Button    id=random
