@@ -12,10 +12,8 @@ func (p *Player) Mark(positionX, positionY int) bool {
 	positionY--
 	p.Ticket.SetGridStatus(positionX, positionY, true)
 
-	if p.Ticket.Grid[positionX][positionY].Status == false {
-		return false
-	}
-	return true
+	return p.Ticket.Grid[positionX][positionY].Status
+
 }
 
 func (p Player) CheckNumber(number int) (int, int) {

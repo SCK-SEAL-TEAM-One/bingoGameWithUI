@@ -26,7 +26,7 @@ func (g *Game) Play() PlayResponse {
 	pickupNumber := g.PickUpNumber()
 	playResponse.Number = pickupNumber
 
-	for index, _ := range g.Players {
+	for index := range g.Players {
 		positionX, positionY := g.Players[index].CheckNumber(pickupNumber)
 		if isInTicket(positionX, positionY) {
 			g.Players[index].Mark(positionX, positionY)

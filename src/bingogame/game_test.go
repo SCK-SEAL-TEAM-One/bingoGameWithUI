@@ -64,8 +64,7 @@ func Test_Play_Should_Be_Play_Response_Number_9_Winner_Empty(t *testing.T) {
 	ticketWithNumberB := MockTicketNumber(ticketBlankPlayerB, 2)
 	playerA := NewPlayer("A", ticketWithNumberA)
 	playerB := NewPlayer("B", ticketWithNumberB)
-	numberBox := NewNumberBox(75)
-	numberBox = MockNumberBox()
+	numberBox := MockNumberBox()
 	allPlayer := []Player{playerA, playerB}
 	game := NewGame(allPlayer, numberBox)
 

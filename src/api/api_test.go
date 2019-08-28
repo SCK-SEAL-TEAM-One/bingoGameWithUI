@@ -101,7 +101,7 @@ func Test_PlayHandler_Should_Be_Json_number_9_winner_Empty(t *testing.T) {
 	response := responseRecorder.Result()
 	body, _ := ioutil.ReadAll(response.Body)
 	var actual bingogame.PlayResponse
-	json.Unmarshal(body, &actual)
+	_ = json.Unmarshal(body, &actual)
 
 	if expected != actual {
 		t.Errorf("expected %v but got %v", expected, actual)
@@ -112,8 +112,7 @@ func Test_ChangeTicketHandler_Input_Name_A_Should_Be_New_Ticket(t *testing.T) {
 	request := httptest.NewRequest("GET", "/bingo/ticket/change?playerName=A", nil)
 	responseRecorder := httptest.NewRecorder()
 	ticket := bingogame.NewTicket(5)
-	oldTicket := bingogame.NewTicket(5)
-	oldTicket = bingogame.MockTicketNumber(ticket, 1)
+	oldTicket := bingogame.MockTicketNumber(ticket, 1)
 	ticket = bingogame.MockTicketNumber(ticket, 3)
 	expectedPlayer := bingogame.Player{
 		Name:   "A",
@@ -134,7 +133,7 @@ func Test_ChangeTicketHandler_Input_Name_A_Should_Be_New_Ticket(t *testing.T) {
 	response := responseRecorder.Result()
 	body, _ := ioutil.ReadAll(response.Body)
 	var actualPlayer bingogame.Player
-	json.Unmarshal(body, &actualPlayer)
+	_ = json.Unmarshal(body, &actualPlayer)
 	if expectedPlayer.Name != actualPlayer.Name ||
 		(expectedPlayer.Ticket.Grid[0][0] != actualPlayer.Ticket.Grid[0][0] ||
 			expectedPlayer.Ticket.Grid[4][4] != actualPlayer.Ticket.Grid[4][4] ||

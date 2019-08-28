@@ -34,18 +34,30 @@ func (a *Api) StartGameHandler(writer http.ResponseWriter, request *http.Request
 func (a *Api) GetPlayersInfoHandler(writer http.ResponseWriter, request *http.Request) {
 	playerInfoResponse := a.GameService.GetPlayerInfo()
 	playerInfoResponseJson, _ := json.Marshal(playerInfoResponse)
-	writer.Write(playerInfoResponseJson)
+	_, err := writer.Write(playerInfoResponseJson)
+	if err != nil {
+		http.Error(writer, err.Error(), http.StatusBadRequest)
+		return
+	}
 }
 
 func (a *Api) PlayHandler(writer http.ResponseWriter, request *http.Request) {
 	playResponse := a.GameService.PlayGame()
 	playJson, _ := json.Marshal(playResponse)
-	writer.Write(playJson)
+	_, err := writer.Write(playJson)
+	if err != nil {
+		http.Error(writer, err.Error(), http.StatusBadRequest)
+		return
+	}
 }
 
 func (a *Api) ChangeTicketHandler(writer http.ResponseWriter, request *http.Request) {
 	playerName := request.URL.Query().Get("playerName")
 	player := a.GameService.ChangeTicket(playerName)
 	playerJson, _ := json.Marshal(player)
-	writer.Write(playerJson)
+	_, err := writer.Write(playerJson)
+	if err != nil {
+		http.Error(writer, err.Error(), http.StatusBadRequest)
+		return
+	}
 }

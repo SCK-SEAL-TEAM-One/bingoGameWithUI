@@ -12,8 +12,7 @@ func Test_AcceptanceTest_VerticalBingoRule_Input_Player_A_And_B_PlayRound_8_Shou
 	ticketWithNumberB := MockTicketNumber(ticketBlankPlayerB, 2)
 	playerA := NewPlayer("A", ticketWithNumberA)
 	playerB := NewPlayer("B", ticketWithNumberB)
-	numberBox := NewNumberBox(75)
-	numberBox = MockNumberBox()
+	numberBox := MockNumberBox()
 	allPlayer := []Player{playerA, playerB}
 	game := NewGame(allPlayer, numberBox)
 	game.Play()
@@ -40,8 +39,7 @@ func Test_AcceptanceTest_VerticalCenterBingoRule_Input_Player_A_And_B_PlayRound_
 	ticketWithNumberB := MockTicketNumber(ticketBlankPlayerB, 3)
 	playerA := NewPlayer("A", ticketWithNumberA)
 	playerB := NewPlayer("B", ticketWithNumberB)
-	numberBox := NewNumberBox(75)
-	numberBox = MockNumberBoxForCase2()
+	numberBox := MockNumberBoxForCase2()
 	allPlayer := []Player{playerA, playerB}
 	game := NewGame(allPlayer, numberBox)
 	game.Play()

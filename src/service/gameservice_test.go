@@ -58,8 +58,7 @@ func Test_PlayGame_Should_Be_Number_9_Winer_Empty(t *testing.T) {
 	ticketWithNumberB := bingogame.MockTicketNumber(ticketBlankPlayerB, 2)
 	playerA := bingogame.NewPlayer("A", ticketWithNumberA)
 	playerB := bingogame.NewPlayer("B", ticketWithNumberB)
-	numberBox := bingogame.NewNumberBox(75)
-	numberBox = bingogame.MockNumberBox()
+	numberBox := bingogame.MockNumberBox()
 	allPlayer := []bingogame.Player{playerA, playerB}
 	game := bingogame.NewGame(allPlayer, numberBox)
 	gameService := service.GameService{Game: game}
@@ -84,8 +83,7 @@ func Test_ChangeTicket_Input_PlayerName_A_Should_Be_Player_A_With_New_Ticket(t *
 	ticketWithNumberB := bingogame.MockTicketNumber(ticketBlankPlayerB, 2)
 	playerA := bingogame.NewPlayer("A", ticketWithNumberA)
 	playerB := bingogame.NewPlayer("B", ticketWithNumberB)
-	numberBox := bingogame.NewNumberBox(75)
-	numberBox = bingogame.MockNumberBox()
+	numberBox := bingogame.MockNumberBox()
 	allPlayer := []bingogame.Player{playerA, playerB}
 	game := bingogame.NewGame(allPlayer, numberBox)
 	gameService := service.GameService{Game: game}
