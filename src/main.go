@@ -1,10 +1,10 @@
 package main
 
 import (
-	apiPackage "api"
+	apiPackage "bingo/api"
+	"bingo/service"
 	"log"
 	"net/http"
-	"service"
 )
 
 func main() {

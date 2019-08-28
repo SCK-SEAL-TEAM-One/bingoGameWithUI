@@ -1,9 +1,9 @@
 package api
 
 import (
+	"bingo/service"
 	"encoding/json"
 	"net/http"
-	"service"
 )
 
 type StartGameRequest struct {

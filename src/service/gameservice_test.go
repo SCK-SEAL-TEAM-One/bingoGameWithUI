@@ -1,8 +1,8 @@
 package service_test
 
 import (
-	"bingogame"
-	"service"
+	"bingo/bingogame"
+	"bingo/service"
 	"testing"
 )
 

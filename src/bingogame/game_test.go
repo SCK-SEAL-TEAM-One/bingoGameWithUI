@@ -1,7 +1,7 @@
 package bingogame_test
 
 import (
-	. "bingogame"
+	. "bingo/bingogame"
 	"testing"
 )
 

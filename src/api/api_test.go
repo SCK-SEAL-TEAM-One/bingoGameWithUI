@@ -1,13 +1,13 @@
 package api_test
 
 import (
-	. "api"
-	"bingogame"
+	. "bingo/api"
+	"bingo/bingogame"
+	"bingo/service"
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
 	"net/http/httptest"
-	"service"
 	"testing"
 )
 
