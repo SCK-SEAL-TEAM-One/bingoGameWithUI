@@ -1,0 +1,9 @@
+version: '3'
+services:
+  my-bingo:
+    container_name: my-bingo
+    image: golfapipol/bingo:1
+    build:
+      context: .
+    ports:
+    - 3000:3000
