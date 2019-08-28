@@ -40,12 +40,7 @@ ${URL}    http://localhost:3000/bingogame
       [Arguments]    ${number}
       Click Button    id=random
       Wait Until Element Contains    id=number    ${number}
-      Element should have class    class=number-${number}    mark
-
-Element should have class
-      [Arguments]    ${locator}    ${target value}
-      ${class}=    Get Element Attribute    ${locator}@class
-      Should Contain    ${class}    ${target value}
+      Element Attribute Value Should Be    class=number-${number}    class    number-${number} mark
 
 แสดงชื่อผู้ชนะ
       Wait Until Element Contains    id=winner    Bingo !!!
